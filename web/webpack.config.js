@@ -7,7 +7,7 @@ module.exports = (env, argv) => {
 	const isDev = argv.mode === 'development'
 
 	return {
-		entry: './src/index.jsx',
+		entry: './src/index.tsx',
 		output: {
 			path: path.resolve(__dirname, 'dist'),
 			filename: '[name].[contenthash].js',
@@ -16,6 +16,13 @@ module.exports = (env, argv) => {
 		},
 		module: {
 			rules: [
+				{
+					test: /\.(ts|tsx)$/,
+					exclude: /node_modules/,
+					use: {
+						loader: 'ts-loader'
+					}
+				},
 				{
 					test: /\.(js|jsx)$/,
 					exclude: /node_modules/,
@@ -64,7 +71,7 @@ module.exports = (env, argv) => {
 			open: true
 		},
 		resolve: {
-			extensions: ['.js', '.jsx']
+			extensions: ['.ts', '.tsx', '.js', '.jsx']
 		},
 		devtool: isDev ? 'inline-source-map' : false
 	}
