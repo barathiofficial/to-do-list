@@ -1,16 +1,21 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import About from './about'
+import { PersistGate } from 'redux-persist/integration/react'
 import Home from './home'
+import { persistor, store } from './redux/store'
 
 function App() {
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path='/' element={<Home />} />
-				<Route path='/about' element={<About />} />
-			</Routes>
-		</BrowserRouter>
+		<Provider store={store}>
+			<PersistGate persistor={persistor}>
+				<BrowserRouter>
+					<Routes>
+						<Route path='/' element={<Home />} />
+					</Routes>
+				</BrowserRouter>
+			</PersistGate>
+		</Provider>
 	)
 }
 
