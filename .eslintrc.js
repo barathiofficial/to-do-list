@@ -77,10 +77,16 @@ module.exports = {
 		'no-restricted-syntax': [
 			'error',
 			{
-				selector:
-					'ArrowFunctionExpression:not(CallExpression > ArrowFunctionExpression):not(Property > ArrowFunctionExpression):not(JSXExpressionContainer > ArrowFunctionExpression)',
-				message:
-					'Arrow functions are not allowed except in callbacks, object properties, and JSX properties.'
+				selector: `
+                ArrowFunctionExpression
+                :not(CallExpression > ArrowFunctionExpression)
+                :not(Property > ArrowFunctionExpression)
+                :not(JSXExpressionContainer > ArrowFunctionExpression)
+                :not(CallExpression[callee.object.name='Promise'] > ArrowFunctionExpression)
+              `,
+				message: `
+                Arrow functions are not allowed except in callbacks, object properties, JSX properties, and as Promise callbacks.
+              `
 			}
 		]
 	}
