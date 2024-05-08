@@ -61,6 +61,14 @@ const taskSlice = createSlice({
 			state.status.toggle = 'succeeded'
 			const index = state.data.findIndex((task) => task.id === action.payload)
 			state.data[index].completed = !state.data[index].completed
+
+			state.data.sort((a, b) => {
+				if (a.completed === b.completed) {
+					return (b.id || 0) - (a.id || 0)
+				}
+
+				return a.completed ? 1 : -1
+			})
 		})
 		builder.addCase(toggleTask.pending, (state) => {
 			state.status.toggle = 'loading'
@@ -85,6 +93,14 @@ const taskSlice = createSlice({
 			const index = state.data.findIndex((task) => task.id === action.payload)
 			state.data[index].text = action.meta.arg.text
 			state.data[index].completed = action.meta.arg.completed
+
+			state.data.sort((a, b) => {
+				if (a.completed === b.completed) {
+					return (b.id || 0) - (a.id || 0)
+				}
+
+				return a.completed ? 1 : -1
+			})
 		})
 		builder.addCase(updateTask.pending, (state) => {
 			state.status.update = 'loading'
