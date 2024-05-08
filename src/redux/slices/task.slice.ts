@@ -1,5 +1,4 @@
 import { addTask, deleteTask, fetchTasks, toggleTask, updateTask } from '@redux/thunks'
-import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import type { Task } from '@services'
 
@@ -34,11 +33,7 @@ const initialState: TaskState = {
 const taskSlice = createSlice({
 	name: 'task',
 	initialState,
-	reducers: {
-		setCurrentId: (state, action: PayloadAction<number | undefined>) => {
-			state.currentId = action.payload
-		}
-	},
+	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(fetchTasks.fulfilled, (state, action) => {
 			state.data = action.payload
@@ -101,5 +96,4 @@ const taskSlice = createSlice({
 	}
 })
 
-export const { setCurrentId } = taskSlice.actions
 export default taskSlice
