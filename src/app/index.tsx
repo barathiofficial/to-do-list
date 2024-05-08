@@ -5,7 +5,7 @@ import { addTask, deleteTask, fetchTasks, toggleTask } from '@redux/thunks'
 import type { Task } from '@services'
 import React from 'react'
 import type { ListRenderItemInfo } from 'react-native'
-import { Animated, FlatList, StyleSheet, View } from 'react-native'
+import { Animated, FlatList, StyleSheet, Text, View } from 'react-native'
 
 export default function App() {
 	const dispatch = useAppDispatch()
@@ -84,6 +84,18 @@ export default function App() {
 		)
 	}, [])
 
+	const renderNoTasks = React.useCallback(() => {
+		return (
+			<React.Fragment>
+				{task.status.fetch === 'succeeded' && (
+					<View style={styles.noTasksWrapper}>
+						<Text style={styles.noTasks}>No tasks</Text>
+					</View>
+				)}
+			</React.Fragment>
+		)
+	}, [])
+
 	React.useEffect(() => {
 		dispatch(fetchTasks())
 	}, [])
@@ -112,6 +124,8 @@ export default function App() {
 			<FlatList
 				data={task.data}
 				keyExtractor={(item) => item.id?.toString() ?? ''}
+				ListEmptyComponent={renderNoTasks}
+				refreshing={task.status.fetch === 'loading'}
 				renderItem={renderItem}
 			/>
 		</View>
@@ -119,5 +133,14 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-	container: {}
+	container: {},
+	noTasksWrapper: {
+		height: 30,
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	noTasks: {
+		textAlign: 'center',
+		color: colors.dark
+	}
 })
