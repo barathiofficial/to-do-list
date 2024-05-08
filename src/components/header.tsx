@@ -6,10 +6,10 @@ import { Animated, Pressable, StyleSheet, Text, View } from 'react-native'
 
 type HeaderProps = {
 	onIconPress?: () => void
-	inputVisible?: boolean
+	rotatePlus?: boolean
 }
 
-export function Header({ onIconPress, inputVisible }: HeaderProps) {
+export function Header(props: HeaderProps) {
 	const rotateAnim = React.useRef(new Animated.Value(0)).current
 
 	const rotate = rotateAnim.interpolate({
@@ -19,11 +19,11 @@ export function Header({ onIconPress, inputVisible }: HeaderProps) {
 
 	React.useEffect(() => {
 		Animated.timing(rotateAnim, {
-			toValue: inputVisible ? 1 : 0,
+			toValue: props.rotatePlus ? 1 : 0,
 			duration: 100,
-			useNativeDriver: true // This is to ensure smooth animation
+			useNativeDriver: true
 		}).start()
-	}, [inputVisible])
+	}, [props.rotatePlus])
 
 	return (
 		<View style={styles.header}>
@@ -32,7 +32,7 @@ export function Header({ onIconPress, inputVisible }: HeaderProps) {
 				<Pressable
 					android_ripple={ripple}
 					style={styles.icon}
-					onPress={onIconPress}>
+					onPress={props.onIconPress}>
 					<Feather
 						color={colors.dark}
 						name='plus'
