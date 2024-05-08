@@ -7,7 +7,7 @@ export type Task = {
 }
 
 export async function fetchTasks() {
-	const query = 'SELECT * FROM `tasks` ORDER BY `id` DESC'
+	const query = 'SELECT * FROM `tasks` ORDER BY `completed` ASC, `id` DESC'
 	const result = await execute(query)
 	const tasks: Task[] = []
 
