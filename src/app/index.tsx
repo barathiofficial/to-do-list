@@ -16,14 +16,18 @@ export default function App() {
 
 	return (
 		<View style={styles.container}>
-			<TextInput style={inputStyle} onFocus={onFocus} onBlur={onBlur} placeholder='Type here...' />
+			<TextInput
+				style={inputStyle}
+				onFocus={onFocus}
+				onBlur={onBlur}
+				placeholder='Type here...'
+			/>
 			<Pressable
 				android_ripple={{
 					color: '#00000090',
 					borderless: false
 				}}
-				style={styles.button}
-			>
+				style={styles.button}>
 				<Text style={styles.buttonText}>Press me</Text>
 			</Pressable>
 		</View>
