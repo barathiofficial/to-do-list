@@ -17,17 +17,17 @@ export default function App() {
 	return (
 		<View style={styles.container}>
 			<TextInput
-				style={inputStyle}
-				onFocus={onFocus}
-				onBlur={onBlur}
 				placeholder='Type here...'
+				style={inputStyle}
+				onBlur={onBlur}
+				onFocus={onFocus}
 			/>
 			<Pressable
+				style={styles.button}
 				android_ripple={{
 					color: '#00000090',
 					borderless: false
-				}}
-				style={styles.button}>
+				}}>
 				<Text style={styles.buttonText}>Press me</Text>
 			</Pressable>
 		</View>
