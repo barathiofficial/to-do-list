@@ -1,12 +1,11 @@
-import { Header, Input, Task } from '@components'
+import { Header, Input, Task as TaskItem } from '@components'
 import colors from '@lib/colors'
 import { useAppDispatch, useAppSelector } from '@redux/hooks'
-import { setCurrentId } from '@redux/slices'
 import { addTask, deleteTask, fetchTasks, toggleTask } from '@redux/thunks'
-import type { Task as ITask } from '@services'
+import type { Task } from '@services'
 import React from 'react'
 import type { ListRenderItemInfo } from 'react-native'
-import { FlatList, StyleSheet, View } from 'react-native'
+import { Animated, FlatList, StyleSheet, View } from 'react-native'
 
 export default function App() {
 	const dispatch = useAppDispatch()
@@ -14,6 +13,9 @@ export default function App() {
 
 	const [text, setText] = React.useState('')
 	const [inputVisible, setInputVisible] = React.useState(false)
+	const [rotatePlus, setRotatePlus] = React.useState(false)
+
+	const inputHeight = React.useRef(new Animated.Value(0)).current
 
 	function toggleInput() {
 		if (inputVisible) {
@@ -24,12 +26,25 @@ export default function App() {
 	}
 
 	function showInput() {
+		setRotatePlus(true)
 		setInputVisible(true)
+		Animated.timing(inputHeight, {
+			toValue: 30,
+			duration: 100,
+			useNativeDriver: false
+		}).start()
 	}
 
 	function hideInput() {
-		setText('')
-		setInputVisible(false)
+		setRotatePlus(false)
+		Animated.timing(inputHeight, {
+			toValue: 0,
+			duration: 100,
+			useNativeDriver: false
+		}).start(() => {
+			setText('')
+			setInputVisible(false)
+		})
 	}
 
 	function onChangeText(text: string) {
@@ -54,14 +69,13 @@ export default function App() {
 
 	function removeTask(id?: number) {
 		return function () {
-			dispatch(setCurrentId(id))
 			dispatch(deleteTask(id || 0))
 		}
 	}
 
-	const renderItem = React.useCallback((data: ListRenderItemInfo<ITask>) => {
+	const renderItem = React.useCallback((data: ListRenderItemInfo<Task>) => {
 		return (
-			<Task
+			<TaskItem
 				completed={data.item.completed}
 				text={data.item.text}
 				onCheck={toggleCompletion(data.item.id)}
@@ -77,21 +91,23 @@ export default function App() {
 	return (
 		<View style={styles.container}>
 			<Header
-				inputVisible={inputVisible}
+				rotatePlus={rotatePlus}
 				onIconPress={toggleInput}
 			/>
 			{inputVisible && (
-				<Input
-					autoFocus
-					cursorColor={colors.medium}
-					loading={task.status.add === 'loading'}
-					placeholder='Write task...'
-					placeholderTextColor={colors.medium}
-					value={text}
-					onCancel={hideInput}
-					onChangeText={onChangeText}
-					onConfirm={createTask}
-				/>
+				<Animated.View style={{ height: inputHeight, overflow: 'hidden' }}>
+					<Input
+						autoFocus
+						cursorColor={colors.medium}
+						loading={task.status.add === 'loading'}
+						placeholder='Write task...'
+						placeholderTextColor={colors.medium}
+						value={text}
+						onCancel={hideInput}
+						onChangeText={onChangeText}
+						onConfirm={createTask}
+					/>
+				</Animated.View>
 			)}
 			<FlatList
 				data={task.data}
