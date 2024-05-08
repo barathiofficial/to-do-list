@@ -2,29 +2,44 @@ import Feather from '@expo/vector-icons/Feather'
 import colors from '@lib/colors'
 import { ripple } from '@lib/themes'
 import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Animated, Pressable, StyleSheet, Text, View } from 'react-native'
 
 type HeaderProps = {
 	onIconPress?: () => void
 	inputVisible?: boolean
 }
 
-export function Header(props: HeaderProps) {
+export function Header({ onIconPress, inputVisible }: HeaderProps) {
+	const rotateAnim = React.useRef(new Animated.Value(0)).current
+
+	const rotate = rotateAnim.interpolate({
+		inputRange: [0, 1],
+		outputRange: ['0deg', '45deg']
+	})
+
+	React.useEffect(() => {
+		Animated.timing(rotateAnim, {
+			toValue: inputVisible ? 1 : 0,
+			duration: 100,
+			useNativeDriver: true // This is to ensure smooth animation
+		}).start()
+	}, [inputVisible])
+
 	return (
 		<View style={styles.header}>
 			<Text style={styles.title}>Tasks</Text>
-			<View style={styles.iconWrapper}>
+			<Animated.View style={[styles.iconWrapper, { transform: [{ rotate }] }]}>
 				<Pressable
 					android_ripple={ripple}
-					style={[styles.icon, props.inputVisible && styles.iconRotate]}
-					onPress={props.onIconPress}>
+					style={styles.icon}
+					onPress={onIconPress}>
 					<Feather
 						color={colors.dark}
 						name='plus'
 						size={24}
 					/>
 				</Pressable>
-			</View>
+			</Animated.View>
 		</View>
 	)
 }
@@ -58,8 +73,5 @@ const styles = StyleSheet.create({
 		height: 40,
 		alignItems: 'center',
 		justifyContent: 'center'
-	},
-	iconRotate: {
-		transform: [{ rotate: '45deg' }]
 	}
 })
