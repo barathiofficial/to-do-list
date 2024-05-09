@@ -6,8 +6,10 @@
 	"scripts": {
 		"start": "expo start",
 		"start:c": "expo start -c",
-		"start:c:a": "expo start -c --android",
+		"start:ca": "expo start -c --android",
+		"start:cal": "expo start -c --android --localhost",
 		"start:a": "expo start --android",
+		"build:a": "eas build --profile preview --platform android",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"format": "prettier --write ."

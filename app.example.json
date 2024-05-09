@@ -21,7 +21,8 @@
 			"adaptiveIcon": {
 				"foregroundImage": "./src/assets/images/adaptive-icon.png",
 				"backgroundColor": "#ffffff"
-			}
+			},
+			"package": "x.x.x"
 		},
 		"web": {
 			"favicon": "./src/assets/images/favicon.png"
@@ -33,6 +34,16 @@
 					"root": "./src/app"
 				}
 			]
-		]
+		],
+		"extra": {
+			"router": {
+				"origin": false,
+				"root": "./src/app/_layout.tsx"
+			},
+			"eas": {
+				"projectId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+			}
+		}
 	}
 }
+
