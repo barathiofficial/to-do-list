@@ -1,6 +1,6 @@
 import Feather from '@expo/vector-icons/Feather'
 import colors from '@lib/colors'
-import { ripple } from '@lib/themes'
+import { gloablStyles, ripple, sizes, typography } from '@lib/themes'
 import React from 'react'
 import type { TextInputProps } from 'react-native'
 import { ActivityIndicator, Dimensions, Pressable, StyleSheet, TextInput, View } from 'react-native'
@@ -18,10 +18,10 @@ export function Input({ style, onCancel, onConfirm, loading, ...props }: InputPr
 				{...props}
 				style={[styles.input, style]}
 			/>
-			<View style={styles.iconWrapper}>
+			<View style={gloablStyles.iconWrapperSmall}>
 				<Pressable
 					android_ripple={ripple}
-					style={styles.iconPressable}
+					style={gloablStyles.iconPressable}
 					onPress={onCancel}>
 					<Feather
 						color={colors.dark}
@@ -30,10 +30,10 @@ export function Input({ style, onCancel, onConfirm, loading, ...props }: InputPr
 					/>
 				</Pressable>
 			</View>
-			<View style={styles.iconWrapper}>
+			<View style={gloablStyles.iconWrapperSmall}>
 				<Pressable
 					android_ripple={ripple}
-					style={styles.iconPressable}
+					style={gloablStyles.iconPressable}
 					onPress={onConfirm}>
 					{loading ? (
 						<ActivityIndicator
@@ -58,29 +58,12 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		paddingHorizontal: 10,
-		height: 30,
-		borderColor: colors.border,
-		borderWidth: 1 / 2
+		height: sizes.taskItemHeight
 	},
 	input: {
 		width: Dimensions.get('window').width - 80,
 		height: '100%',
 		paddingHorizontal: 10,
-		color: colors.dark,
-		fontSize: 14
-	},
-	iconWrapper: {
-		width: 30,
-		height: 30,
-		overflow: 'hidden',
-		borderRadius: 15,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	iconPressable: {
-		width: '100%',
-		height: '100%',
-		justifyContent: 'center',
-		alignItems: 'center'
+		...typography.md
 	}
 })

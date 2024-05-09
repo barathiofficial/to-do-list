@@ -1,5 +1,6 @@
 import { Header, Input, Task as TaskItem } from '@components'
 import colors from '@lib/colors'
+import { sizes, typography } from '@lib/themes'
 import { useAppDispatch, useAppSelector } from '@redux/hooks'
 import { addTask, deleteTask, fetchTasks, toggleTask } from '@redux/thunks'
 import type { Task } from '@services'
@@ -29,7 +30,7 @@ export default function App() {
 		setRotatePlus(true)
 		setInputVisible(true)
 		Animated.timing(inputHeight, {
-			toValue: 30,
+			toValue: sizes.taskItemHeight,
 			duration: 100,
 			useNativeDriver: false
 		}).start()
@@ -94,20 +95,20 @@ export default function App() {
 				)}
 			</React.Fragment>
 		)
-	}, [])
+	}, [task.status.fetch])
 
 	React.useEffect(() => {
 		dispatch(fetchTasks())
 	}, [])
 
 	return (
-		<View style={styles.container}>
+		<React.Fragment>
 			<Header
 				rotatePlus={rotatePlus}
 				onIconPress={toggleInput}
 			/>
 			{inputVisible && (
-				<Animated.View style={{ height: inputHeight, overflow: 'hidden' }}>
+				<Animated.View style={[styles.input, { height: inputHeight }]}>
 					<Input
 						autoFocus
 						cursorColor={colors.medium}
@@ -125,22 +126,31 @@ export default function App() {
 				data={task.data}
 				keyExtractor={(item) => item.id?.toString() ?? ''}
 				ListEmptyComponent={renderNoTasks}
+				ListFooterComponent={View}
+				ListFooterComponentStyle={styles.listFooter}
 				refreshing={task.status.fetch === 'loading'}
 				renderItem={renderItem}
 			/>
-		</View>
+		</React.Fragment>
 	)
 }
 
 const styles = StyleSheet.create({
-	container: {},
+	input: {
+		borderBottomColor: colors.light,
+		borderBottomWidth: sizes.borderWidth,
+		overflow: 'hidden'
+	},
 	noTasksWrapper: {
-		height: 30,
+		height: sizes.taskItemHeight,
 		alignItems: 'center',
 		justifyContent: 'center'
 	},
 	noTasks: {
-		textAlign: 'center',
-		color: colors.dark
+		...typography.md,
+		textAlign: 'center'
+	},
+	listFooter: {
+		marginBottom: 20
 	}
 })

@@ -1,6 +1,6 @@
 import Feather from '@expo/vector-icons/Feather'
 import colors from '@lib/colors'
-import { ripple } from '@lib/themes'
+import { gloablStyles, ripple, sizes, typography } from '@lib/themes'
 import React from 'react'
 import { Animated, Pressable, StyleSheet, Text, View } from 'react-native'
 
@@ -26,12 +26,12 @@ export function Header(props: HeaderProps) {
 	}, [props.rotatePlus])
 
 	return (
-		<View style={styles.header}>
+		<View style={[styles.header, gloablStyles.shadow]}>
 			<Text style={styles.title}>Tasks</Text>
-			<Animated.View style={[styles.iconWrapper, { transform: [{ rotate }] }]}>
+			<Animated.View style={[gloablStyles.iconWrapper, { transform: [{ rotate }] }]}>
 				<Pressable
 					android_ripple={ripple}
-					style={styles.icon}
+					style={gloablStyles.iconPressable}
 					onPress={props.onIconPress}>
 					<Feather
 						color={colors.dark}
@@ -46,32 +46,13 @@ export function Header(props: HeaderProps) {
 
 const styles = StyleSheet.create({
 	header: {
-		height: 55,
+		height: sizes.headerHeight,
 		backgroundColor: colors.white,
-		borderBottomColor: colors.medium,
-		borderBottomWidth: 1 / 2,
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		flexDirection: 'row',
-		paddingHorizontal: 20
+		paddingLeft: 20,
+		paddingRight: 10
 	},
-	title: {
-		color: colors.dark,
-		fontSize: 20,
-		fontWeight: 'bold'
-	},
-	iconWrapper: {
-		width: 40,
-		height: 40,
-		borderRadius: 20,
-		overflow: 'hidden',
-		alignItems: 'center',
-		justifyContent: 'center'
-	},
-	icon: {
-		width: 40,
-		height: 40,
-		alignItems: 'center',
-		justifyContent: 'center'
-	}
+	title: typography.lg
 })
