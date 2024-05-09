@@ -115,6 +115,7 @@ export default function App() {
 						loading={task.status.add === 'loading'}
 						placeholder='Write task...'
 						placeholderTextColor={colors.medium}
+						selectionColor={colors.selection}
 						value={text}
 						onCancel={hideInput}
 						onChangeText={onChangeText}

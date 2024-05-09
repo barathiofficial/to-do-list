@@ -4,7 +4,8 @@ const colors = {
 	dark: '#243a40',
 	medium: '#6c757d',
 	light: '#ced4da',
-	shadow: '#000'
+	shadow: '#000',
+	selection: '#d4edda'
 }
 
 export default colors
