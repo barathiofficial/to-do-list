@@ -12,7 +12,9 @@
 		"build:a": "eas build --profile preview --platform android",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"android": "expo run:android",
+		"ios": "expo run:ios"
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^2.2.3",
@@ -26,7 +28,8 @@
 		"react-native-screens": "~3.29.0",
 		"react-redux": "^9.1.2",
 		"redux": "^5.0.1",
-		"expo-checkbox": "~2.7.0"
+		"expo-checkbox": "~2.7.0",
+		"expo-dev-client": "~3.3.11"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.20.0",
