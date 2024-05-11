@@ -21,7 +21,8 @@
 			"adaptiveIcon": {
 				"foregroundImage": "./src/assets/images/adaptive-icon.png",
 				"backgroundColor": "#ffffff"
-			}
+			},
+			"package": "com.vinzy.todolist"
 		},
 		"web": {
 			"favicon": "./src/assets/images/favicon.png"
@@ -36,4 +37,3 @@
 		]
 	}
 }
-
