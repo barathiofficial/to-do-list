@@ -5,7 +5,6 @@ import type { Task } from '@services'
 type Status = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 type TaskState = {
-	currentId: number | undefined
 	data: Task[]
 	status: {
 		add: Status
@@ -18,7 +17,6 @@ type TaskState = {
 }
 
 const initialState: TaskState = {
-	currentId: 0,
 	data: [],
 	status: {
 		add: 'idle',
@@ -36,7 +34,7 @@ const taskSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(fetchTasks.fulfilled, (state, action) => {
-			state.data = action.payload
+			state.data = action.payload || []
 			state.status.fetch = 'succeeded'
 		})
 		builder.addCase(fetchTasks.pending, (state) => {
@@ -48,7 +46,10 @@ const taskSlice = createSlice({
 		})
 		builder.addCase(addTask.fulfilled, (state, action) => {
 			state.status.add = 'succeeded'
-			state.data.unshift(action.payload)
+
+			if (action.payload) {
+				state.data.unshift(action.payload)
+			}
 		})
 		builder.addCase(addTask.pending, (state) => {
 			state.status.add = 'loading'
@@ -59,7 +60,7 @@ const taskSlice = createSlice({
 		})
 		builder.addCase(toggleTask.fulfilled, (state, action) => {
 			state.status.toggle = 'succeeded'
-			const index = state.data.findIndex((task) => task.id === action.payload)
+			const index = state.data.findIndex((task) => task.id === action.payload?.id)
 			state.data[index].completed = !state.data[index].completed
 
 			state.data.sort((a, b) => {
@@ -90,7 +91,7 @@ const taskSlice = createSlice({
 		})
 		builder.addCase(updateTask.fulfilled, (state, action) => {
 			state.status.update = 'succeeded'
-			const index = state.data.findIndex((task) => task.id === action.payload)
+			const index = state.data.findIndex((task) => task.id === action.payload?.id)
 			state.data[index].text = action.meta.arg.text
 			state.data[index].completed = action.meta.arg.completed
 
