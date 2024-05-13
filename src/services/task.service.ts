@@ -25,7 +25,6 @@ export async function $addTask(text: string) {
 			text,
 			completed: false
 		}
-	} catch (e) {
 	} finally {
 		await stmt.finalizeAsync()
 	}
@@ -45,7 +44,6 @@ export async function $fetchTasks() {
 			text: task.text,
 			completed: task.completed === 1
 		}))
-	} catch (e) {
 	} finally {
 		await stmt.finalizeAsync()
 	}
@@ -59,7 +57,6 @@ export async function $deleteTask(id: number) {
 	try {
 		await stmt.executeAsync({ $id: id })
 		return id
-	} catch (e) {
 	} finally {
 		await stmt.finalizeAsync()
 	}
@@ -78,7 +75,6 @@ export async function $updateTask(task: Task) {
 		})
 
 		return $fetchTask(task.id)
-	} catch (e) {
 	} finally {
 		await stmt.finalizeAsync()
 	}
@@ -97,7 +93,6 @@ export async function $fetchTask(id: number) {
 			text: task?.text || '',
 			completed: task?.completed === 1
 		} as Task
-	} catch (e) {
 	} finally {
 		await stmt.finalizeAsync()
 	}
@@ -111,7 +106,6 @@ export async function $toggleTask(id: number) {
 	try {
 		await stmt.executeAsync({ $id: id })
 		return $fetchTask(id)
-	} catch (e) {
 	} finally {
 		await stmt.finalizeAsync()
 	}
