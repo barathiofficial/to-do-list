@@ -1,29 +1,5 @@
-import { PixelRatio, StyleSheet } from 'react-native'
-import colors from './colors'
-
-export const ripple = {
-	color: colors.ripple,
-	borderless: false
-}
-
-export const sizes = {
-	taskItemHeight: 50,
-	headerHeight: 55,
-	borderWidth: PixelRatio.roundToNearestPixel(1 / 2)
-}
-
-export const typography = StyleSheet.create({
-	md: {
-		fontSize: 16,
-		fontWeight: '500',
-		color: colors.dark
-	},
-	lg: {
-		fontSize: 20,
-		fontWeight: '700',
-		color: colors.dark
-	}
-})
+import { colors } from '@constants'
+import { StyleSheet } from 'react-native'
 
 export const gloablStyles = StyleSheet.create({
 	shadow: {

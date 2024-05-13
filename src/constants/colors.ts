@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
 	white: '#fff',
 	ripple: '#adb5bd',
 	dark: '#243a40',
@@ -7,5 +7,3 @@ const colors = {
 	shadow: '#000',
 	selection: '#d4edda'
 }
-
-export default colors

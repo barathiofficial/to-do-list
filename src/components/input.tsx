@@ -1,6 +1,6 @@
+import { colors } from '@constants'
 import Feather from '@expo/vector-icons/Feather'
-import colors from '@lib/colors'
-import { gloablStyles, ripple, sizes, typography } from '@lib/themes'
+import { gloablStyles, ripple, sizes, typography } from '@themes'
 import React from 'react'
 import type { TextInputProps } from 'react-native'
 import { ActivityIndicator, Dimensions, Pressable, StyleSheet, TextInput, View } from 'react-native'

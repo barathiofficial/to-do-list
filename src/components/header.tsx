@@ -1,6 +1,6 @@
+import { colors } from '@constants'
 import Feather from '@expo/vector-icons/Feather'
-import colors from '@lib/colors'
-import { gloablStyles, ripple, sizes, typography } from '@lib/themes'
+import { gloablStyles, ripple, sizes, typography } from '@themes'
 import React from 'react'
 import { Animated, Pressable, StyleSheet, Text, View } from 'react-native'
 

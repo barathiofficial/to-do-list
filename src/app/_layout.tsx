@@ -1,4 +1,4 @@
-import colors from '@lib/colors'
+import { colors } from '@constants'
 import store from '@redux/store'
 import { Slot } from 'expo-router'
 import React from 'react'

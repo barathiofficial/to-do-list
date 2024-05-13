@@ -1,4 +1,4 @@
-import initDB from '@lib/db'
+import initDB from '@db'
 
 export type Task = {
 	id: number
