@@ -16,7 +16,7 @@ export function Input({ style, onCancel, onConfirm, loading, ...props }: InputPr
 		<View style={styles.container}>
 			<TextInput
 				{...props}
-				style={[styles.input, style]}
+				style={[styles.input, typography.md, style]}
 			/>
 			<View style={gloablStyles.iconWrapperSmall}>
 				<Pressable
@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
 	input: {
 		width: Dimensions.get('window').width - 80,
 		height: '100%',
-		paddingHorizontal: 10,
-		...typography.md
+		paddingHorizontal: 10
 	}
 })
