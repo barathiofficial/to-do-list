@@ -31,7 +31,7 @@ export function Task(props: TaskProps) {
 			<View style={styles.textWrapper}>
 				<Text
 					numberOfLines={2}
-					style={[styles.text, props.completed && styles.completed]}>
+					style={[typography.md, props.completed && styles.completed]}>
 					{props.text}
 				</Text>
 			</View>
@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
 		height: '100%',
 		justifyContent: 'center'
 	},
-	text: typography.md,
 	completed: {
 		textDecorationLine: 'line-through',
 		color: colors.dark
