@@ -3,7 +3,7 @@ import { colors } from '@constants'
 import { useAppDispatch, useAppSelector } from '@redux/hooks'
 import { deleteTask, fetchTasks, toggleTask } from '@redux/thunks'
 import type { Task } from '@services'
-import { sizes, typography } from '@themes'
+import { gloablStyles, sizes, typography } from '@themes'
 import { goTo } from '@utils'
 import React from 'react'
 import type { ListRenderItemInfo } from 'react-native'
@@ -62,7 +62,7 @@ export default function Tasks() {
 				ListFooterComponentStyle={styles.footer}
 				refreshing={task.status.fetch === 'loading'}
 				renderItem={renderTask}
-				style={styles.container}
+				style={gloablStyles.container}
 			/>
 			<FloatingButton onPress={goTo('new-task')} />
 		</React.Fragment>
@@ -70,10 +70,6 @@ export default function Tasks() {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: colors.white
-	},
 	input: {
 		borderBottomColor: colors.light,
 		borderBottomWidth: sizes.borderWidth,

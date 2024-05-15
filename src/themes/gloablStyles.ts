@@ -2,6 +2,10 @@ import { colors } from '@constants'
 import { StyleSheet } from 'react-native'
 
 export const gloablStyles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: colors.white
+	},
 	shadow: {
 		shadowColor: colors.shadow,
 		shadowOffset: {

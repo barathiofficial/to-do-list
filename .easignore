@@ -26,3 +26,4 @@ yarn-error.*
 
 !app.json
 eas.json
+features.txt

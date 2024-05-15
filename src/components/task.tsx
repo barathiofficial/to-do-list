@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 		borderBottomColor: colors.light,
 		flexDirection: 'row',
 		alignItems: 'center',
-		minHeight: sizes.taskItemHeight,
+		minHeight: 50,
 		paddingHorizontal: 10
 	},
 	checkbox: {

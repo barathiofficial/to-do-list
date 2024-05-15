@@ -1,68 +1,96 @@
 import { colors } from '@constants'
-import Feather from '@expo/vector-icons/Feather'
-import { gloablStyles, ripple, sizes, typography } from '@themes'
+import { gloablStyles, sizes, typography } from '@themes'
 import React from 'react'
-import type { TextInputProps } from 'react-native'
-import { ActivityIndicator, Dimensions, Pressable, StyleSheet, TextInput, View } from 'react-native'
+import type {
+	NativeSyntheticEvent,
+	TextInputFocusEventData,
+	TextInputProps,
+	TextProps,
+	ViewProps
+} from 'react-native'
+import { StyleSheet, Text, TextInput, View } from 'react-native'
 
 type InputProps = {
-	onCancel?: () => void
-	onConfirm?: () => void
-	loading?: boolean
+	label?: string
+	error?: string
+	styles?: {
+		container?: ViewProps['style']
+		input?: TextInputProps['style']
+		label?: TextProps['style']
+	}
 } & TextInputProps
 
-export function Input({ style, onCancel, onConfirm, loading, ...props }: InputProps) {
+export function Input({ style, label, styles: $styles, error, ...props }: InputProps) {
+	const [focused, setFocused] = React.useState(false)
+
+	const hasError = !!error?.trim()
+
+	function onFocus(e: NativeSyntheticEvent<TextInputFocusEventData>) {
+		setFocused(true)
+		props.onFocus?.(e)
+	}
+
+	function onBlur(e: NativeSyntheticEvent<TextInputFocusEventData>) {
+		setFocused(false)
+		props.onBlur?.(e)
+	}
+
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, $styles?.container]}>
+			{label && <Text style={[styles.label, typography.md, $styles?.label]}>{label}</Text>}
 			<TextInput
 				{...props}
-				style={[styles.input, typography.md, style]}
+				cursorColor={colors.dark}
+				placeholderTextColor={colors.medium}
+				selectionColor={colors.light}
+				style={[
+					styles.input,
+					focused && styles.focused,
+					hasError && styles.hasError,
+					props.multiline && styles.multiline,
+					typography.md,
+					$styles?.input,
+					style
+				]}
+				onBlur={onBlur}
+				onFocus={onFocus}
 			/>
-			<View style={gloablStyles.iconWrapperSmall}>
-				<Pressable
-					android_ripple={ripple}
-					style={gloablStyles.iconPressable}
-					onPress={onCancel}>
-					<Feather
-						color={colors.dark}
-						name='x'
-						size={16}
-					/>
-				</Pressable>
-			</View>
-			<View style={gloablStyles.iconWrapperSmall}>
-				<Pressable
-					android_ripple={ripple}
-					style={gloablStyles.iconPressable}
-					onPress={onConfirm}>
-					{loading ? (
-						<ActivityIndicator
-							color={colors.dark}
-							size={16}
-						/>
-					) : (
-						<Feather
-							color={colors.dark}
-							name='check'
-							size={16}
-						/>
-					)}
-				</Pressable>
-			</View>
+			{error?.trim() && <Text style={styles.error}>{error}</Text>}
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
 	container: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		paddingHorizontal: 10,
-		height: sizes.taskItemHeight
+		marginBottom: 10
+	},
+	label: {
+		marginBottom: 2
 	},
 	input: {
-		width: Dimensions.get('window').width - 80,
-		height: '100%',
-		paddingHorizontal: 10
+		paddingHorizontal: 10,
+		paddingVertical: 5,
+		borderRadius: 5,
+		color: colors.dark,
+		borderWidth: sizes.borderWidth,
+		borderColor: colors.medium,
+		backgroundColor: colors.white
+	},
+	focused: {
+		borderColor: colors.dark,
+		...gloablStyles.shadow
+	},
+	hasError: {
+		borderColor: colors.danger,
+		borderWidth: sizes.borderWidth + 1
+	},
+	multiline: {
+		height: 100,
+		textAlignVertical: 'top',
+		paddingVertical: 10
+	},
+	error: {
+		color: colors.danger,
+		fontSize: 12
 	}
 })

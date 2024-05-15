@@ -5,5 +5,6 @@ export const colors = {
 	medium: '#6c757d',
 	light: '#ced4da',
 	shadow: '#000',
-	selection: '#d4edda'
+	selection: '#d4edda',
+	danger: '#dc3545'
 }
