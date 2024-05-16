@@ -15,7 +15,7 @@ CREATE TABLE `statuses` (
 --> statement-breakpoint
 CREATE TABLE `subTasks` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-	`task` text(255) NOT NULL,
+	`text` text(255) NOT NULL,
 	`taskId` integer NOT NULL,
 	`statusId` integer NOT NULL,
 	`createdAt` text(255) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE `subTasks` (
 --> statement-breakpoint
 CREATE TABLE `tasks` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-	`task` text(255) NOT NULL,
+	`text` text(255) NOT NULL,
 	`description` text(255),
 	`categoryId` integer NOT NULL,
 	`statusId` integer NOT NULL,

@@ -17,7 +17,7 @@ export const priorities = sqliteTable('priorities', {
 
 export const tasks = sqliteTable('tasks', {
 	id: integer('id').primaryKey({ autoIncrement: true }),
-	task: text('task', { length: 255 }).notNull(),
+	text: text('text', { length: 255 }).notNull(),
 	description: text('description', { length: 255 }),
 	categoryId: integer('categoryId')
 		.references(() => categories.id, {
@@ -43,7 +43,7 @@ export const tasks = sqliteTable('tasks', {
 
 export const subTasks = sqliteTable('subTasks', {
 	id: integer('id').primaryKey({ autoIncrement: true }),
-	task: text('task', { length: 255 }).notNull(),
+	text: text('text', { length: 255 }).notNull(),
 	taskId: integer('taskId')
 		.references(() => tasks.id, {
 			onDelete: 'cascade',
