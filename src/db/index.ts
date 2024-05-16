@@ -1,14 +1,12 @@
-import * as SQLite from 'expo-sqlite'
+import { drizzle } from 'drizzle-orm/expo-sqlite'
+import { openDatabaseSync } from 'expo-sqlite/next'
 
-let db: SQLite.SQLiteDatabase | null = null
+let db: ReturnType<typeof drizzle> | null = null
 
-export default async function initDB() {
+export default function initDB() {
 	if (!db) {
-		db = await SQLite.openDatabaseAsync('todo.db')
-
-		db.execAsync(
-			'CREATE TABLE IF NOT EXISTS `tasks` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `text` TEXT NOT NULL, `completed` INTEGER NOT NULL DEFAULT 0)'
-		)
+		const expo = openDatabaseSync('todo.db')
+		db = drizzle(expo)
 	}
 
 	return db
