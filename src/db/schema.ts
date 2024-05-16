@@ -19,42 +19,42 @@ export const tasks = sqliteTable('tasks', {
 	id: integer('id').primaryKey({ autoIncrement: true }),
 	task: text('task', { length: 255 }).notNull(),
 	description: text('description', { length: 255 }),
-	category_id: integer('category_id')
+	categoryId: integer('categoryId')
 		.references(() => categories.id, {
 			onDelete: 'cascade',
 			onUpdate: 'cascade'
 		})
 		.notNull(),
-	status_id: integer('status_id')
+	statusId: integer('statusId')
 		.references(() => statuses.id, {
 			onDelete: 'cascade',
 			onUpdate: 'cascade'
 		})
 		.notNull(),
-	priority_id: integer('priority_id')
+	priorityId: integer('priorityId')
 		.references(() => priorities.id, {
 			onDelete: 'cascade',
 			onUpdate: 'cascade'
 		})
 		.notNull(),
-	due_date: text('due_date', { length: 255 }),
-	created_at: text('created_at', { length: 255 }).notNull()
+	dueDate: text('dueDate', { length: 255 }),
+	createdAt: text('createdAt', { length: 255 }).notNull()
 })
 
-export const subTasks = sqliteTable('sub_tasks', {
+export const subTasks = sqliteTable('subTasks', {
 	id: integer('id').primaryKey({ autoIncrement: true }),
 	task: text('task', { length: 255 }).notNull(),
-	task_id: integer('task_id')
+	taskId: integer('taskId')
 		.references(() => tasks.id, {
 			onDelete: 'cascade',
 			onUpdate: 'cascade'
 		})
 		.notNull(),
-	status_id: integer('status_id')
+	statusId: integer('statusId')
 		.references(() => statuses.id, {
 			onDelete: 'cascade',
 			onUpdate: 'cascade'
 		})
 		.notNull(),
-	created_at: text('created_at', { length: 255 }).notNull()
+	createdAt: text('createdAt', { length: 255 }).notNull()
 })
