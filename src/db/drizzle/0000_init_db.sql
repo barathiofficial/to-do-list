@@ -13,26 +13,26 @@ CREATE TABLE `statuses` (
 	`name` text(255) NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE `sub_tasks` (
+CREATE TABLE `subTasks` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`task` text(255) NOT NULL,
-	`task_id` integer NOT NULL,
-	`status_id` integer NOT NULL,
-	`created_at` text(255) NOT NULL,
-	FOREIGN KEY (`task_id`) REFERENCES `tasks`(`id`) ON UPDATE cascade ON DELETE cascade,
-	FOREIGN KEY (`status_id`) REFERENCES `statuses`(`id`) ON UPDATE cascade ON DELETE cascade
+	`taskId` integer NOT NULL,
+	`statusId` integer NOT NULL,
+	`createdAt` text(255) NOT NULL,
+	FOREIGN KEY (`taskId`) REFERENCES `tasks`(`id`) ON UPDATE cascade ON DELETE cascade,
+	FOREIGN KEY (`statusId`) REFERENCES `statuses`(`id`) ON UPDATE cascade ON DELETE cascade
 );
 --> statement-breakpoint
 CREATE TABLE `tasks` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`task` text(255) NOT NULL,
 	`description` text(255),
-	`category_id` integer NOT NULL,
-	`status_id` integer NOT NULL,
-	`priority_id` integer NOT NULL,
-	`due_date` text(255),
-	`created_at` text(255) NOT NULL,
-	FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON UPDATE cascade ON DELETE cascade,
-	FOREIGN KEY (`status_id`) REFERENCES `statuses`(`id`) ON UPDATE cascade ON DELETE cascade,
-	FOREIGN KEY (`priority_id`) REFERENCES `priorities`(`id`) ON UPDATE cascade ON DELETE cascade
+	`categoryId` integer NOT NULL,
+	`statusId` integer NOT NULL,
+	`priorityId` integer NOT NULL,
+	`dueDate` text(255),
+	`createdAt` text(255) NOT NULL,
+	FOREIGN KEY (`categoryId`) REFERENCES `categories`(`id`) ON UPDATE cascade ON DELETE cascade,
+	FOREIGN KEY (`statusId`) REFERENCES `statuses`(`id`) ON UPDATE cascade ON DELETE cascade,
+	FOREIGN KEY (`priorityId`) REFERENCES `priorities`(`id`) ON UPDATE cascade ON DELETE cascade
 );

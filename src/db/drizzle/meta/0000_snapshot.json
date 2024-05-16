@@ -1,7 +1,7 @@
 {
 	"version": "6",
 	"dialect": "sqlite",
-	"id": "46831ee6-89bb-4f90-9537-c80a8ea04983",
+	"id": "465ae952-98eb-4207-87d1-b8f36fd0d232",
 	"prevId": "00000000-0000-0000-0000-000000000000",
 	"tables": {
 		"categories": {
@@ -73,8 +73,8 @@
 			"compositePrimaryKeys": {},
 			"uniqueConstraints": {}
 		},
-		"sub_tasks": {
-			"name": "sub_tasks",
+		"subTasks": {
+			"name": "subTasks",
 			"columns": {
 				"id": {
 					"name": "id",
@@ -90,22 +90,22 @@
 					"notNull": true,
 					"autoincrement": false
 				},
-				"task_id": {
-					"name": "task_id",
+				"taskId": {
+					"name": "taskId",
 					"type": "integer",
 					"primaryKey": false,
 					"notNull": true,
 					"autoincrement": false
 				},
-				"status_id": {
-					"name": "status_id",
+				"statusId": {
+					"name": "statusId",
 					"type": "integer",
 					"primaryKey": false,
 					"notNull": true,
 					"autoincrement": false
 				},
-				"created_at": {
-					"name": "created_at",
+				"createdAt": {
+					"name": "createdAt",
 					"type": "text(255)",
 					"primaryKey": false,
 					"notNull": true,
@@ -114,20 +114,20 @@
 			},
 			"indexes": {},
 			"foreignKeys": {
-				"sub_tasks_task_id_tasks_id_fk": {
-					"name": "sub_tasks_task_id_tasks_id_fk",
-					"tableFrom": "sub_tasks",
+				"subTasks_taskId_tasks_id_fk": {
+					"name": "subTasks_taskId_tasks_id_fk",
+					"tableFrom": "subTasks",
 					"tableTo": "tasks",
-					"columnsFrom": ["task_id"],
+					"columnsFrom": ["taskId"],
 					"columnsTo": ["id"],
 					"onDelete": "cascade",
 					"onUpdate": "cascade"
 				},
-				"sub_tasks_status_id_statuses_id_fk": {
-					"name": "sub_tasks_status_id_statuses_id_fk",
-					"tableFrom": "sub_tasks",
+				"subTasks_statusId_statuses_id_fk": {
+					"name": "subTasks_statusId_statuses_id_fk",
+					"tableFrom": "subTasks",
 					"tableTo": "statuses",
-					"columnsFrom": ["status_id"],
+					"columnsFrom": ["statusId"],
 					"columnsTo": ["id"],
 					"onDelete": "cascade",
 					"onUpdate": "cascade"
@@ -160,36 +160,36 @@
 					"notNull": false,
 					"autoincrement": false
 				},
-				"category_id": {
-					"name": "category_id",
+				"categoryId": {
+					"name": "categoryId",
 					"type": "integer",
 					"primaryKey": false,
 					"notNull": true,
 					"autoincrement": false
 				},
-				"status_id": {
-					"name": "status_id",
+				"statusId": {
+					"name": "statusId",
 					"type": "integer",
 					"primaryKey": false,
 					"notNull": true,
 					"autoincrement": false
 				},
-				"priority_id": {
-					"name": "priority_id",
+				"priorityId": {
+					"name": "priorityId",
 					"type": "integer",
 					"primaryKey": false,
 					"notNull": true,
 					"autoincrement": false
 				},
-				"due_date": {
-					"name": "due_date",
+				"dueDate": {
+					"name": "dueDate",
 					"type": "text(255)",
 					"primaryKey": false,
 					"notNull": false,
 					"autoincrement": false
 				},
-				"created_at": {
-					"name": "created_at",
+				"createdAt": {
+					"name": "createdAt",
 					"type": "text(255)",
 					"primaryKey": false,
 					"notNull": true,
@@ -198,29 +198,29 @@
 			},
 			"indexes": {},
 			"foreignKeys": {
-				"tasks_category_id_categories_id_fk": {
-					"name": "tasks_category_id_categories_id_fk",
+				"tasks_categoryId_categories_id_fk": {
+					"name": "tasks_categoryId_categories_id_fk",
 					"tableFrom": "tasks",
 					"tableTo": "categories",
-					"columnsFrom": ["category_id"],
+					"columnsFrom": ["categoryId"],
 					"columnsTo": ["id"],
 					"onDelete": "cascade",
 					"onUpdate": "cascade"
 				},
-				"tasks_status_id_statuses_id_fk": {
-					"name": "tasks_status_id_statuses_id_fk",
+				"tasks_statusId_statuses_id_fk": {
+					"name": "tasks_statusId_statuses_id_fk",
 					"tableFrom": "tasks",
 					"tableTo": "statuses",
-					"columnsFrom": ["status_id"],
+					"columnsFrom": ["statusId"],
 					"columnsTo": ["id"],
 					"onDelete": "cascade",
 					"onUpdate": "cascade"
 				},
-				"tasks_priority_id_priorities_id_fk": {
-					"name": "tasks_priority_id_priorities_id_fk",
+				"tasks_priorityId_priorities_id_fk": {
+					"name": "tasks_priorityId_priorities_id_fk",
 					"tableFrom": "tasks",
 					"tableTo": "priorities",
-					"columnsFrom": ["priority_id"],
+					"columnsFrom": ["priorityId"],
 					"columnsTo": ["id"],
 					"onDelete": "cascade",
 					"onUpdate": "cascade"
