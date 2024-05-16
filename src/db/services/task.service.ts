@@ -1,112 +1,43 @@
 import initDB from '@db'
+import { tasks } from '@db/schema'
+import { eq } from 'drizzle-orm'
 
-export type Task = {
-	id: number
-	text: string
-	completed: boolean
-}
+export type Task = typeof tasks.$inferSelect
 
-type RawTask = {
-	id: number
-	text: string
-	completed: number
-}
-
-export async function $addTask(text: string) {
+export async function $addTask(task: Omit<Task, 'id' | 'createdAt'>): Promise<Task> {
 	const db = await initDB()
-	const query = 'INSERT INTO `tasks` (`text`, `completed`) VALUES ($text, $completed)'
-	const stmt = await db.prepareAsync(query)
+	const createdAt = new Date().toISOString()
+	const { lastInsertRowId: id } = await db.insert(tasks).values({ ...task, createdAt })
 
-	try {
-		const result = await stmt.executeAsync({ $text: text, $completed: 0 })
-
-		return {
-			id: result.lastInsertRowId,
-			text,
-			completed: false
-		}
-	} finally {
-		await stmt.finalizeAsync()
+	return {
+		...task,
+		id,
+		createdAt
 	}
 }
 
-export async function $fetchTasks() {
+export async function $fetchTasks(): Promise<Task[]> {
 	const db = await initDB()
-	const query = 'SELECT * FROM `tasks` ORDER BY `completed` ASC, `id` DESC'
-	const stmt = await db.prepareAsync(query)
-
-	try {
-		const result = await stmt.executeAsync<RawTask>()
-		const tasks = await result.getAllAsync()
-
-		return tasks.map<Task>((task) => ({
-			id: task.id,
-			text: task.text,
-			completed: task.completed === 1
-		}))
-	} finally {
-		await stmt.finalizeAsync()
-	}
+	return db.select().from(tasks)
 }
 
 export async function $deleteTask(id: number) {
 	const db = await initDB()
-	const query = 'DELETE FROM `tasks` WHERE `id` = $id'
-	const stmt = await db.prepareAsync(query)
-
-	try {
-		await stmt.executeAsync({ $id: id })
-		return id
-	} finally {
-		await stmt.finalizeAsync()
-	}
+	db.delete(tasks).where(eq(tasks.id, id))
+	return id
 }
 
-export async function $updateTask(task: Task) {
+export async function $updateTask(
+	task: Partial<Omit<Task, 'id' | 'createdAt'>> & Pick<Task, 'id'>
+): Promise<Task> {
 	const db = await initDB()
-	const query = 'UPDATE `tasks` SET `text` = $text, `completed` = $completed WHERE `id` = $id'
-	const stmt = await db.prepareAsync(query)
-
-	try {
-		await stmt.executeAsync({
-			$id: task.id,
-			$text: task.text,
-			$completed: task.completed ? 1 : 0
-		})
-
-		return $fetchTask(task.id)
-	} finally {
-		await stmt.finalizeAsync()
-	}
+	const { id, ...data } = task
+	db.update(tasks).set(data).where(eq(tasks.id, id))
+	return $fetchTask(id)
 }
 
-export async function $fetchTask(id: number) {
+export async function $fetchTask(id: number): Promise<Task> {
 	const db = await initDB()
-	const query = 'SELECT * FROM `tasks` WHERE `id` = $id'
-	const stmt = await db.prepareAsync(query)
-
-	try {
-		const result = await stmt.executeAsync<RawTask>({ $id: id })
-		const task = await result.getFirstAsync()
-		return {
-			id: task?.id || 0,
-			text: task?.text || '',
-			completed: task?.completed === 1
-		} as Task
-	} finally {
-		await stmt.finalizeAsync()
-	}
-}
-
-export async function $toggleTask(id: number) {
-	const db = await initDB()
-	const query = 'UPDATE `tasks` SET `completed` = NOT `completed` WHERE `id` = $id'
-	const stmt = await db.prepareAsync(query)
-
-	try {
-		await stmt.executeAsync({ $id: id })
-		return $fetchTask(id)
-	} finally {
-		await stmt.finalizeAsync()
-	}
+	const $tasks = await db.select().from(tasks).where(eq(tasks.id, id))
+	return $tasks[0]
 }
