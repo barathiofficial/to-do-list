@@ -1,6 +1,6 @@
+import type { Task } from '@db/services'
 import { addTask, deleteTask, fetchTasks, toggleTask, updateTask } from '@redux/thunks'
 import { createSlice } from '@reduxjs/toolkit'
-import type { Task } from '@services'
 
 type Status = 'idle' | 'loading' | 'succeeded' | 'failed'
 

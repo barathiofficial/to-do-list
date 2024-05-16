@@ -1,5 +1,5 @@
+import { $addTask, $deleteTask, $fetchTasks, $toggleTask, $updateTask } from '@db/services'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { $addTask, $deleteTask, $fetchTasks, $toggleTask, $updateTask } from '@services'
 
 function createServiceThunk<R, A = void>(actionName: string, serviceFn: (args: A) => Promise<R>) {
 	return createAsyncThunk<R, A>(actionName, async (args, api) => {
