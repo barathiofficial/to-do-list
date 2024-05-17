@@ -1,5 +1,5 @@
 import type { Task } from '@db/services'
-import { addTask, deleteTask, fetchTasks, toggleTask, updateTask } from '@redux/thunks'
+import { addTask, deleteTask, fetchTasks, updateTask } from '@redux/thunks'
 import { createSlice } from '@reduxjs/toolkit'
 
 type Status = 'idle' | 'loading' | 'succeeded' | 'failed'
@@ -11,7 +11,6 @@ type TaskState = {
 		fetch: Status
 		update: Status
 		delete: Status
-		toggle: Status
 	}
 	error: string | null | undefined
 }
@@ -22,8 +21,7 @@ const initialState: TaskState = {
 		add: 'idle',
 		fetch: 'idle',
 		update: 'idle',
-		delete: 'idle',
-		toggle: 'idle'
+		delete: 'idle'
 	},
 	error: null
 }
@@ -58,26 +56,6 @@ const taskSlice = createSlice({
 			state.status.add = 'failed'
 			state.error = action.error.message
 		})
-		builder.addCase(toggleTask.fulfilled, (state, action) => {
-			state.status.toggle = 'succeeded'
-			const index = state.data.findIndex((task) => task.id === action.payload?.id)
-			state.data[index].completed = !state.data[index].completed
-
-			state.data.sort((a, b) => {
-				if (a.completed === b.completed) {
-					return (b.id || 0) - (a.id || 0)
-				}
-
-				return a.completed ? 1 : -1
-			})
-		})
-		builder.addCase(toggleTask.pending, (state) => {
-			state.status.toggle = 'loading'
-		})
-		builder.addCase(toggleTask.rejected, (state, action) => {
-			state.status.toggle = 'failed'
-			state.error = action.error.message
-		})
 		builder.addCase(deleteTask.fulfilled, (state, action) => {
 			state.status.delete = 'succeeded'
 			state.data = state.data.filter((task) => task.id !== action.payload)
@@ -92,16 +70,10 @@ const taskSlice = createSlice({
 		builder.addCase(updateTask.fulfilled, (state, action) => {
 			state.status.update = 'succeeded'
 			const index = state.data.findIndex((task) => task.id === action.payload?.id)
-			state.data[index].text = action.meta.arg.text
-			state.data[index].completed = action.meta.arg.completed
 
-			state.data.sort((a, b) => {
-				if (a.completed === b.completed) {
-					return (b.id || 0) - (a.id || 0)
-				}
-
-				return a.completed ? 1 : -1
-			})
+			if (index !== -1) {
+				state.data[index] = action.payload
+			}
 		})
 		builder.addCase(updateTask.pending, (state) => {
 			state.status.update = 'loading'
