@@ -8,6 +8,7 @@
 		"orientation": "portrait",
 		"icon": "./src/assets/images/icon.png",
 		"userInterfaceStyle": "light",
+		"jsEngine": "jsc",
 		"splash": {
 			"image": "./src/assets/images/splash.png",
 			"resizeMode": "contain",
