@@ -8,7 +8,6 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 type TaskProps = {
 	onPress?: () => void
 	text?: string
-	completed?: boolean
 	onCheck?: () => void
 	onDelete?: () => void
 }
@@ -24,14 +23,14 @@ export function Task(props: TaskProps) {
 					<Checkbox
 						color={colors.dark}
 						style={styles.checkbox}
-						value={props.completed}
+						// value={props.completed}
 					/>
 				</Pressable>
 			</View>
 			<View style={styles.textWrapper}>
 				<Text
 					numberOfLines={2}
-					style={[typography.md, props.completed && styles.completed]}>
+					style={typography.md}>
 					{props.text}
 				</Text>
 			</View>
