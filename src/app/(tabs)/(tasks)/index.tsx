@@ -2,7 +2,7 @@ import { FloatingButton, Task as TaskItem } from '@components'
 import { colors } from '@constants'
 import type { Task } from '@db/services'
 import { useAppDispatch, useAppSelector } from '@redux/hooks'
-import { deleteTask, fetchTasks, toggleTask } from '@redux/thunks'
+import { deleteTask, fetchTasks } from '@redux/thunks'
 import { gloablStyles, sizes, typography } from '@themes'
 import { goTo } from '@utils'
 import React from 'react'
@@ -13,12 +13,6 @@ export default function Tasks() {
 	const dispatch = useAppDispatch()
 	const task = useAppSelector((state) => state.task)
 
-	function toggleCompletion(id: number) {
-		return function () {
-			dispatch(toggleTask(id))
-		}
-	}
-
 	function removeTask(id: number) {
 		return function () {
 			dispatch(deleteTask(id))
@@ -28,9 +22,7 @@ export default function Tasks() {
 	const renderTask = React.useCallback((data: ListRenderItemInfo<Task>) => {
 		return (
 			<TaskItem
-				completed={data.item.completed}
 				text={data.item.text}
-				onCheck={toggleCompletion(data.item.id)}
 				onDelete={removeTask(data.item.id)}
 			/>
 		)
@@ -76,7 +68,7 @@ const styles = StyleSheet.create({
 		overflow: 'hidden'
 	},
 	noTasksWrapper: {
-		height: sizes.taskItemHeight,
+		height: 50,
 		alignItems: 'center',
 		justifyContent: 'center'
 	},
