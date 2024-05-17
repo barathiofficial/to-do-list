@@ -12,11 +12,11 @@ export function FloatingButton(props: FloatingButtonProps) {
 	return (
 		<View style={[styles.container, gloablStyles.shadow]}>
 			<Pressable
-				android_ripple={ripple}
+				android_ripple={ripple.dark}
 				style={styles.button}
 				onPress={props.onPress}>
 				<Feather
-					color={colors.medium}
+					color={colors.light}
 					name='plus'
 					size={24}
 				/>
@@ -30,13 +30,13 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		bottom: 20,
 		right: 20,
-		backgroundColor: colors.white,
+		backgroundColor: colors.primary,
 		width: 60,
 		height: 60,
 		borderRadius: 30,
 		alignItems: 'center',
 		justifyContent: 'center',
-		borderWidth: sizes.borderWidth,
+		borderWidth: sizes.border.width,
 		borderColor: colors.light,
 		overflow: 'hidden'
 	},

@@ -1,3 +1,4 @@
+export * from './fontFamily'
 export * from './gloablStyles'
 export * from './ripple'
 export * from './sizes'

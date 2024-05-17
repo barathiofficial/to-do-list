@@ -1,6 +1,8 @@
 import { colors } from '@constants'
-import { gloablStyles, sizes, typography } from '@themes'
+import { sizes, typography } from '@themes'
 import React from 'react'
+import type { Control, FieldValues, Path, PathValue } from 'react-hook-form'
+import { useController } from 'react-hook-form'
 import type {
 	NativeSyntheticEvent,
 	TextInputFocusEventData,
@@ -10,20 +12,32 @@ import type {
 } from 'react-native'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 
-type InputProps = {
+type InputProps<T extends FieldValues> = {
 	label?: string
-	error?: string
 	styles?: {
 		container?: ViewProps['style']
 		input?: TextInputProps['style']
 		label?: TextProps['style']
 	}
+	control?: Control<T>
+	name?: Path<T>
 } & TextInputProps
 
-export function Input({ style, label, styles: $styles, error, ...props }: InputProps) {
-	const [focused, setFocused] = React.useState(false)
+export function Input<T extends FieldValues>({
+	label,
+	styles: $styles,
+	style,
+	control,
+	name,
+	...props
+}: InputProps<T>) {
+	const controller = useController({
+		control,
+		name: name as Path<T>,
+		defaultValue: '' as PathValue<T, Path<T>>
+	})
 
-	const hasError = !!error?.trim()
+	const [focused, setFocused] = React.useState(false)
 
 	function onFocus(e: NativeSyntheticEvent<TextInputFocusEventData>) {
 		setFocused(true)
@@ -37,52 +51,56 @@ export function Input({ style, label, styles: $styles, error, ...props }: InputP
 
 	return (
 		<View style={[styles.container, $styles?.container]}>
-			{label && <Text style={[styles.label, typography.md, $styles?.label]}>{label}</Text>}
+			{label && <Text style={[styles.label, typography.sm, $styles?.label]}>{label}</Text>}
 			<TextInput
 				{...props}
 				cursorColor={colors.dark}
-				placeholderTextColor={colors.medium}
+				placeholderTextColor={colors.gray}
 				selectionColor={colors.light}
+				value={controller.field.value || props.value}
 				style={[
 					styles.input,
 					focused && styles.focused,
-					hasError && styles.hasError,
+					controller.fieldState.invalid && styles.hasError,
 					props.multiline && styles.multiline,
-					typography.md,
+					typography.sm,
 					$styles?.input,
 					style
 				]}
 				onBlur={onBlur}
+				onChangeText={controller.field.onChange || props.onChangeText}
 				onFocus={onFocus}
 			/>
-			{error?.trim() && <Text style={styles.error}>{error}</Text>}
+			{controller.fieldState.error && (
+				<Text style={[typography.xs, styles.error]}>
+					{controller.fieldState.error.message}
+				</Text>
+			)}
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
 	container: {
-		marginBottom: 10
+		marginBottom: 12
 	},
 	label: {
 		marginBottom: 2
 	},
 	input: {
+		height: sizes.height.input,
 		paddingHorizontal: 10,
-		paddingVertical: 5,
 		borderRadius: 5,
 		color: colors.dark,
-		borderWidth: sizes.borderWidth,
-		borderColor: colors.medium,
-		backgroundColor: colors.white
+		borderWidth: sizes.border.width,
+		borderColor: colors.secondary,
+		backgroundColor: colors.light
 	},
 	focused: {
-		borderColor: colors.dark,
-		...gloablStyles.shadow
+		borderColor: colors.gray
 	},
 	hasError: {
-		borderColor: colors.danger,
-		borderWidth: sizes.borderWidth + 1
+		borderColor: colors.danger
 	},
 	multiline: {
 		height: 100,
@@ -91,6 +109,8 @@ const styles = StyleSheet.create({
 	},
 	error: {
 		color: colors.danger,
-		fontSize: 12
+		position: 'absolute',
+		top: '100%',
+		left: 0
 	}
 })

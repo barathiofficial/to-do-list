@@ -1,6 +1,12 @@
 import { colors } from '@constants'
 
 export const ripple = {
-	color: colors.ripple,
-	borderless: false
+	dark: {
+		color: colors.dark,
+		borderless: false
+	},
+	light: {
+		color: colors.secondary,
+		borderless: false
+	}
 }

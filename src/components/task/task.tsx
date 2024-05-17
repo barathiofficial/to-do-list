@@ -17,7 +17,7 @@ export function Task(props: TaskProps) {
 		<View style={styles.task}>
 			<View style={gloablStyles.iconWrapper}>
 				<Pressable
-					android_ripple={ripple}
+					android_ripple={ripple.light}
 					style={gloablStyles.iconPressable}
 					onPress={props.onCheck}>
 					<Checkbox
@@ -36,7 +36,7 @@ export function Task(props: TaskProps) {
 			</View>
 			<View style={gloablStyles.iconWrapper}>
 				<Pressable
-					android_ripple={ripple}
+					android_ripple={ripple.light}
 					style={gloablStyles.iconPressable}
 					onPress={props.onDelete}>
 					<Feather
@@ -53,7 +53,7 @@ export function Task(props: TaskProps) {
 const styles = StyleSheet.create({
 	task: {
 		flex: 1,
-		borderBottomWidth: sizes.borderWidth,
+		borderBottomWidth: sizes.border.width,
 		borderBottomColor: colors.light,
 		flexDirection: 'row',
 		alignItems: 'center',

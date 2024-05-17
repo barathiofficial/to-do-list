@@ -4,30 +4,41 @@ import { categories, priorities, statuses } from '@db/schema'
 import StoreProvider from '@redux/context/StoreProvider'
 import { gloablStyles } from '@themes'
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
+import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
+import * as SplashScreen from 'expo-splash-screen'
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const db = initDB()
+SplashScreen.preventAutoHideAsync()
 
 export default function AppLayout() {
 	const { success, error } = useMigrations(db, migrations)
+	const [fontsLoaded, fontError] = useFonts({
+		'inter-regular': require('@/assets/fonts/Inter-Regular.ttf'),
+		'inter-medium': require('@/assets/fonts/Inter-Medium.ttf'),
+		'inter-semibold': require('@/assets/fonts/Inter-SemiBold.ttf'),
+		'inter-bold': require('@/assets/fonts/Inter-Bold.ttf')
+	})
+
+	const onLayoutRootView = React.useCallback(async () => {
+		if (fontsLoaded || fontError) {
+			await SplashScreen.hideAsync()
+		}
+	}, [fontsLoaded, fontError])
+
+	if (!fontsLoaded && !fontError) {
+		return <Text>Loading fonts...</Text>
+	}
 
 	if (error) {
-		return (
-			<View>
-				<Text>Migration error: {error.message}</Text>
-			</View>
-		)
+		return <Text>Migration error: {error.message}</Text>
 	}
 
 	if (!success) {
-		return (
-			<View>
-				<Text>Migration is in progress...</Text>
-			</View>
-		)
+		return <Text>Migration is in progress...</Text>
 	}
 
 	if (success) {
@@ -72,7 +83,9 @@ export default function AppLayout() {
 	}
 
 	return (
-		<SafeAreaView style={gloablStyles.container}>
+		<SafeAreaView
+			style={gloablStyles.container}
+			onLayout={onLayoutRootView}>
 			<StoreProvider>
 				<Stack screenOptions={{ headerShown: false }}>
 					<Stack.Screen name='(tabs)' />

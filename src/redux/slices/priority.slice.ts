@@ -1,11 +1,11 @@
-import type { Category } from '@db/services'
-import { addCategory, deleteCategory, fetchCategories, updateCategory } from '@redux/thunks'
+import type { Priority } from '@db/services'
+import { addPriority, deletePriority, fetchPriorities, updatePriority } from '@redux/thunks'
 import { createSlice } from '@reduxjs/toolkit'
 
 type Status = 'idle' | 'loading' | 'succeeded' | 'failed'
 
-type CategoryState = {
-	data: Category[]
+type PriorityState = {
+	data: Priority[]
 	status: {
 		add: Status
 		fetch: Status
@@ -15,7 +15,7 @@ type CategoryState = {
 	error: string | null | undefined
 }
 
-const initialState: CategoryState = {
+const initialState: PriorityState = {
 	data: [],
 	status: {
 		add: 'idle',
@@ -26,63 +26,63 @@ const initialState: CategoryState = {
 	error: null
 }
 
-const categorySlice = createSlice({
-	name: 'category',
+const prioritySlice = createSlice({
+	name: 'priority',
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
-		builder.addCase(fetchCategories.fulfilled, (state, action) => {
+		builder.addCase(fetchPriorities.fulfilled, (state, action) => {
 			state.data = action.payload || []
 			state.status.fetch = 'succeeded'
 		})
-		builder.addCase(fetchCategories.pending, (state) => {
+		builder.addCase(fetchPriorities.pending, (state) => {
 			state.status.fetch = 'loading'
 		})
-		builder.addCase(fetchCategories.rejected, (state, action) => {
+		builder.addCase(fetchPriorities.rejected, (state, action) => {
 			state.status.fetch = 'failed'
 			state.error = action.error.message
 		})
-		builder.addCase(addCategory.fulfilled, (state, action) => {
+		builder.addCase(addPriority.fulfilled, (state, action) => {
 			state.status.add = 'succeeded'
 
 			if (action.payload) {
 				state.data.unshift(action.payload)
 			}
 		})
-		builder.addCase(addCategory.pending, (state) => {
+		builder.addCase(addPriority.pending, (state) => {
 			state.status.add = 'loading'
 		})
-		builder.addCase(addCategory.rejected, (state, action) => {
+		builder.addCase(addPriority.rejected, (state, action) => {
 			state.status.add = 'failed'
 			state.error = action.error.message
 		})
-		builder.addCase(deleteCategory.fulfilled, (state, action) => {
+		builder.addCase(deletePriority.fulfilled, (state, action) => {
 			state.status.delete = 'succeeded'
-			state.data = state.data.filter((c) => c.id !== action.payload)
+			state.data = state.data.filter((p) => p.id !== action.payload)
 		})
-		builder.addCase(deleteCategory.pending, (state) => {
+		builder.addCase(deletePriority.pending, (state) => {
 			state.status.delete = 'loading'
 		})
-		builder.addCase(deleteCategory.rejected, (state, action) => {
+		builder.addCase(deletePriority.rejected, (state, action) => {
 			state.status.delete = 'failed'
 			state.error = action.error.message
 		})
-		builder.addCase(updateCategory.fulfilled, (state, action) => {
+		builder.addCase(updatePriority.fulfilled, (state, action) => {
 			state.status.update = 'succeeded'
-			const index = state.data.findIndex((c) => c.id === action.payload?.id)
+			const index = state.data.findIndex((p) => p.id === action.payload?.id)
 
 			if (index !== -1) {
 				state.data[index] = action.payload
 			}
 		})
-		builder.addCase(updateCategory.pending, (state) => {
+		builder.addCase(updatePriority.pending, (state) => {
 			state.status.update = 'loading'
 		})
-		builder.addCase(updateCategory.rejected, (state, action) => {
+		builder.addCase(updatePriority.rejected, (state, action) => {
 			state.status.update = 'failed'
 			state.error = action.error.message
 		})
 	}
 })
 
-export default categorySlice
+export default prioritySlice

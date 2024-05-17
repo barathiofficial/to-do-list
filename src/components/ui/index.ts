@@ -1,4 +1,6 @@
 export * from './floating-button'
 export * from './header'
 export * from './input'
-export * from './task'
+export * from './modal'
+export * from './pick-item'
+export * from './select'

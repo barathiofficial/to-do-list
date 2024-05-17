@@ -58,7 +58,7 @@ const taskSlice = createSlice({
 		})
 		builder.addCase(deleteTask.fulfilled, (state, action) => {
 			state.status.delete = 'succeeded'
-			state.data = state.data.filter((task) => task.id !== action.payload)
+			state.data = state.data.filter((t) => t.id !== action.payload)
 		})
 		builder.addCase(deleteTask.pending, (state) => {
 			state.status.delete = 'loading'
@@ -69,7 +69,7 @@ const taskSlice = createSlice({
 		})
 		builder.addCase(updateTask.fulfilled, (state, action) => {
 			state.status.update = 'succeeded'
-			const index = state.data.findIndex((task) => task.id === action.payload?.id)
+			const index = state.data.findIndex((t) => t.id === action.payload?.id)
 
 			if (index !== -1) {
 				state.data[index] = action.payload

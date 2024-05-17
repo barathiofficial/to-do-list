@@ -1,7 +1,17 @@
-import { PixelRatio } from 'react-native'
-
 export const sizes = {
-	headerHeight: 55,
-	borderWidth: PixelRatio.roundToNearestPixel(1 / 2),
-	containerPadding: 20
+	height: {
+		header: 55,
+		input: 40,
+		button: 40,
+		select: 40
+	},
+	border: {
+		width: 1
+	},
+	padding: {
+		input: 10,
+		button: 10,
+		container: 20,
+		modal: 10
+	}
 }

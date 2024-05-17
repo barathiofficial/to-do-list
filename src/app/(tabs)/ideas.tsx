@@ -1,4 +1,4 @@
-import { Task as TaskItem } from '@components'
+import { Task as TaskItem } from '@components/task'
 import { colors } from '@constants'
 import type { Task } from '@db/services'
 import { useAppDispatch, useAppSelector } from '@redux/hooks'
@@ -59,7 +59,7 @@ export default function Ideas() {
 const styles = StyleSheet.create({
 	input: {
 		borderBottomColor: colors.light,
-		borderBottomWidth: sizes.borderWidth,
+		borderBottomWidth: sizes.border.width,
 		overflow: 'hidden'
 	},
 	noTasksWrapper: {

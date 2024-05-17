@@ -22,12 +22,10 @@ export async function $deleteCategory(id: number) {
 	return id
 }
 
-export async function $updateCategory(
-	category: Partial<Omit<Category, 'id' | 'createdAt'>> & Pick<Category, 'id'>
-): Promise<Category> {
+export async function $updateCategory(category: Category): Promise<Category> {
 	const db = initDB()
-	const { id, ...data } = category
-	await db.update(categories).set(data).where(eq(categories.id, id))
+	const { id, name } = category
+	await db.update(categories).set({ name }).where(eq(categories.id, id))
 	return $fetchCategory(id)
 }
 

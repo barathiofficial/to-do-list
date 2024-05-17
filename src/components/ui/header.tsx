@@ -10,19 +10,22 @@ type HeaderProps = {
 export function Header(props: HeaderProps) {
 	return (
 		<View style={[styles.header, gloablStyles.shadow]}>
-			<Text style={typography.lg}>{props.title}</Text>
+			<Text style={[typography.lg, styles.title]}>{props.title}</Text>
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
 	header: {
-		height: sizes.headerHeight,
-		backgroundColor: colors.white,
+		height: sizes.height.header,
+		backgroundColor: colors.primary,
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		flexDirection: 'row',
-		paddingLeft: sizes.containerPadding,
+		paddingLeft: sizes.padding.container,
 		paddingRight: 10
+	},
+	title: {
+		color: colors.light
 	}
 })

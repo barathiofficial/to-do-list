@@ -1,4 +1,4 @@
-import { Header } from '@components'
+import { Header } from '@components/ui'
 import { Stack } from 'expo-router'
 import React from 'react'
 
