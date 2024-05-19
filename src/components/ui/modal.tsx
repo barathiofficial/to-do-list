@@ -1,4 +1,4 @@
-import { gloablStyles, ripple, sizes, typography } from '@/themes'
+import { gloablStyles, ripple, sizes } from '@/themes'
 import Feather from '@expo/vector-icons/Feather'
 import React from 'react'
 import type { ModalProps as RNModalProps } from 'react-native'
@@ -57,7 +57,7 @@ export function Modal({
 					<TouchableWithoutFeedback>
 						<View style={[styles.content, style]}>
 							<View style={styles.header}>
-								<Text style={[typography.md, styles.title]}>{title}</Text>
+								<Text style={[styles.title]}>{title}</Text>
 								<Pressable
 									android_ripple={ripple.dark}
 									style={styles.close}

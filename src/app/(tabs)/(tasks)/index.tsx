@@ -1,6 +1,11 @@
+import { Container } from '@/components/ui'
 import React from 'react'
-import { View } from 'react-native'
+import { Text } from 'react-native'
 
 export default function Tasks() {
-	return <View></View>
+	return (
+		<Container>
+			<Text>Tasks</Text>
+		</Container>
+	)
 }

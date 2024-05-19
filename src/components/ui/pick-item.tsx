@@ -1,4 +1,4 @@
-import { ripple, sizes, typography } from '@/themes'
+import { ripple, sizes } from '@/themes'
 import Feather from '@expo/vector-icons/Feather'
 import React from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
@@ -17,7 +17,7 @@ export function PickItem(props: PickItemProps) {
 			style={[styles.container, props.lastItem && styles.lastItem]}
 			onPress={props.onSelect}>
 			<View style={styles.content}>
-				<Text style={typography.md}>{props.text}</Text>
+				<Text>{props.text}</Text>
 				{props.selected && (
 					<Feather
 						name='check'

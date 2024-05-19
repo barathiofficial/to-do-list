@@ -1,5 +1,5 @@
 import { Header } from '@/components/ui'
-import { typography } from '@/themes'
+import { fontFamily, sizes } from '@/themes'
 import Feather from '@expo/vector-icons/Feather'
 import { Tabs } from 'expo-router'
 import React from 'react'
@@ -52,16 +52,12 @@ export default function TabsLayout() {
 									<Feather
 										color={color}
 										name={screen.icon}
-										size={20}
+										size={24}
 									/>
 								)
 							},
 							tabBarLabel: function ({ color }) {
-								return (
-									<Text style={[styles.label, typography.xs, { color }]}>
-										{screen.title}
-									</Text>
-								)
+								return <Text style={[styles.label, { color }]}>{screen.title}</Text>
 							}
 						}}
 					/>
@@ -73,9 +69,11 @@ export default function TabsLayout() {
 
 const styles = StyleSheet.create({
 	tabBar: {
-		borderTopWidth: 1
+		height: sizes.height.tabBar
 	},
 	label: {
-		marginBottom: 4
+		marginBottom: 5,
+		fontSize: 12,
+		fontFamily: fontFamily.OpenSans.Medium
 	}
 })

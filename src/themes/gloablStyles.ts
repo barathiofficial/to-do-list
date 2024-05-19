@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native'
+import { colors } from './colors'
 
 export const gloablStyles = StyleSheet.create({
 	container: {
-		flex: 1
+		flex: 1,
+		backgroundColor: colors.light
 	},
 	shadow: {
 		shadowOffset: {
@@ -12,27 +14,5 @@ export const gloablStyles = StyleSheet.create({
 		shadowOpacity: 0.25,
 		shadowRadius: 3.84,
 		elevation: 5
-	},
-	iconWrapperSmall: {
-		width: 30,
-		height: 30,
-		borderRadius: 15,
-		overflow: 'hidden',
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	iconWrapper: {
-		width: 40,
-		height: 40,
-		borderRadius: 20,
-		overflow: 'hidden',
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	iconPressable: {
-		width: '100%',
-		height: '100%',
-		justifyContent: 'center',
-		alignItems: 'center'
 	}
 })

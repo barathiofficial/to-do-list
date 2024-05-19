@@ -1,4 +1,4 @@
-import { ripple, sizes, typography } from '@/themes'
+import { ripple, sizes } from '@/themes'
 import React from 'react'
 import type { PressableProps, TextInputProps, TextProps, ViewProps } from 'react-native'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
@@ -22,11 +22,7 @@ export function Select(props: InputProps) {
 
 	return (
 		<View style={[styles.container, props.styles?.container]}>
-			{props.label && (
-				<Text style={[styles.label, typography.sm, props.styles?.label]}>
-					{props.label}
-				</Text>
-			)}
+			{props.label && <Text style={[styles.label, props.styles?.label]}>{props.label}</Text>}
 			<View
 				style={[
 					styles.select,
@@ -39,13 +35,13 @@ export function Select(props: InputProps) {
 					style={styles.pressable}
 					onPress={props.onPress}>
 					{props.value ? (
-						<Text style={[typography.sm, styles.value]}>{props.value}</Text>
+						<Text style={styles.value}>{props.value}</Text>
 					) : (
-						<Text style={[typography.sm, styles.placeholder]}>{props.placeholder}</Text>
+						<Text style={styles.placeholder}>{props.placeholder}</Text>
 					)}
 				</Pressable>
 			</View>
-			{hasError && <Text style={[typography.xs, styles.error]}>{props.error}</Text>}
+			{hasError && <Text style={styles.error}>{props.error}</Text>}
 		</View>
 	)
 }

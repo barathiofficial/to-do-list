@@ -1,4 +1,4 @@
-import { sizes, typography } from '@/themes'
+import { sizes } from '@/themes'
 import React from 'react'
 import type { Control, FieldValues, Path, PathValue } from 'react-hook-form'
 import { useController } from 'react-hook-form'
@@ -50,7 +50,7 @@ export function Input<T extends FieldValues>({
 
 	return (
 		<View style={[styles.container, $styles?.container]}>
-			{label && <Text style={[styles.label, typography.sm, $styles?.label]}>{label}</Text>}
+			{label && <Text style={[styles.label, $styles?.label]}>{label}</Text>}
 			<TextInput
 				{...props}
 				value={controller.field.value || props.value}
@@ -59,7 +59,6 @@ export function Input<T extends FieldValues>({
 					focused && styles.focused,
 					controller.fieldState.invalid && styles.hasError,
 					props.multiline && styles.multiline,
-					typography.sm,
 					$styles?.input,
 					style
 				]}
@@ -68,9 +67,7 @@ export function Input<T extends FieldValues>({
 				onFocus={onFocus}
 			/>
 			{controller.fieldState.error && (
-				<Text style={[typography.xs, styles.error]}>
-					{controller.fieldState.error.message}
-				</Text>
+				<Text style={[styles.error]}>{controller.fieldState.error.message}</Text>
 			)}
 		</View>
 	)
