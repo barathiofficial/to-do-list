@@ -1,4 +1,5 @@
 import { Header } from '@/components/ui'
+import { pick } from '@/utils'
 import { Stack } from 'expo-router'
 import React from 'react'
 
@@ -24,12 +25,7 @@ export default function TasksLayout() {
 						name={screen.id}
 						options={{
 							header: function () {
-								return (
-									<Header
-										showBackButton={screen.showBackButton}
-										title={screen.title}
-									/>
-								)
+								return <Header {...pick(screen, 'showBackButton', 'title')} />
 							}
 						}}
 					/>
