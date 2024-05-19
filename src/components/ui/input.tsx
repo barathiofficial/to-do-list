@@ -1,4 +1,4 @@
-import { sizes } from '@/themes'
+import { colors, fontFamily, sizes } from '@/themes'
 import React from 'react'
 import type { Control, FieldValues, Path, PathValue } from 'react-hook-form'
 import { useController } from 'react-hook-form'
@@ -20,6 +20,7 @@ type InputProps<T extends FieldValues> = {
 	}
 	control?: Control<T>
 	name?: Path<T>
+	error?: string
 } & TextInputProps
 
 export function Input<T extends FieldValues>({
@@ -28,24 +29,65 @@ export function Input<T extends FieldValues>({
 	style,
 	control,
 	name,
+	error,
 	...props
 }: InputProps<T>) {
-	const controller = useController({
-		control,
-		name: name as Path<T>,
-		defaultValue: '' as PathValue<T, Path<T>>
-	})
+	const controller =
+		control &&
+		name &&
+		useController({
+			control,
+			name,
+			defaultValue: '' as PathValue<T, Path<T>>
+		})
 
 	const [focused, setFocused] = React.useState(false)
+	const [localValue, setLocalValue] = React.useState(props.value || '')
 
-	function onFocus(e: NativeSyntheticEvent<TextInputFocusEventData>) {
+	const regularField = {
+		value: localValue,
+		onChange: setLocalValue
+	}
+
+	const regularFieldState = {
+		error: {
+			message: error
+		},
+		invalid: !!error?.trim()
+	}
+
+	const field = controller ? controller.field : regularField
+	const fieldState = controller ? controller.fieldState : regularFieldState
+
+	const inputStyle = React.useMemo(() => {
+		return [
+			styles.input,
+			focused && styles.focused,
+			fieldState.invalid && styles.hasError,
+			props.multiline && styles.multiline,
+			$styles?.input,
+			style
+		]
+	}, [focused, fieldState.invalid, props.multiline, $styles?.input, style])
+
+	const handleFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
 		setFocused(true)
 		props.onFocus?.(e)
 	}
 
-	function onBlur(e: NativeSyntheticEvent<TextInputFocusEventData>) {
+	const handleBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
 		setFocused(false)
 		props.onBlur?.(e)
+	}
+
+	const handleChangeText = (text: string) => {
+		field.onChange(text)
+
+		if (!control) {
+			setLocalValue(text)
+		}
+
+		props.onChangeText?.(text)
 	}
 
 	return (
@@ -53,22 +95,14 @@ export function Input<T extends FieldValues>({
 			{label && <Text style={[styles.label, $styles?.label]}>{label}</Text>}
 			<TextInput
 				{...props}
-				value={controller.field.value || props.value}
-				style={[
-					styles.input,
-					focused && styles.focused,
-					controller.fieldState.invalid && styles.hasError,
-					props.multiline && styles.multiline,
-					$styles?.input,
-					style
-				]}
-				onBlur={onBlur}
-				onChangeText={controller.field.onChange || props.onChangeText}
-				onFocus={onFocus}
+				placeholderTextColor={colors.textInput.placeholder}
+				style={inputStyle}
+				value={field.value}
+				onBlur={handleBlur}
+				onChangeText={handleChangeText}
+				onFocus={handleFocus}
 			/>
-			{controller.fieldState.error && (
-				<Text style={[styles.error]}>{controller.fieldState.error.message}</Text>
-			)}
+			{fieldState.error && <Text style={[styles.error]}>{fieldState.error.message}</Text>}
 		</View>
 	)
 }
@@ -78,16 +112,28 @@ const styles = StyleSheet.create({
 		marginBottom: 12
 	},
 	label: {
-		marginBottom: 2
+		marginBottom: -1,
+		color: colors.accent.text.primary,
+		fontSize: sizes.fontSize.sm,
+		fontFamily: fontFamily.Poppins.Medium
 	},
 	input: {
 		height: sizes.height.input,
 		paddingHorizontal: 10,
 		borderRadius: 5,
-		borderWidth: sizes.border.width
+		borderWidth: sizes.border.width,
+		borderColor: colors.textInput.border.default,
+		backgroundColor: colors.textInput.background.default,
+		color: colors.textInput.text.default,
+		fontSize: sizes.fontSize.sm,
+		fontFamily: fontFamily.Poppins.Regular
 	},
-	focused: {},
-	hasError: {},
+	focused: {
+		borderColor: colors.textInput.border.focused
+	},
+	hasError: {
+		borderColor: colors.textInput.border.error
+	},
 	multiline: {
 		height: 100,
 		textAlignVertical: 'top',
@@ -96,6 +142,10 @@ const styles = StyleSheet.create({
 	error: {
 		position: 'absolute',
 		top: '100%',
-		left: 0
+		left: 0,
+		color: colors.textInput.error,
+		fontSize: sizes.fontSize.xs,
+		fontFamily: fontFamily.Poppins.Medium,
+		marginTop: -1
 	}
 })
