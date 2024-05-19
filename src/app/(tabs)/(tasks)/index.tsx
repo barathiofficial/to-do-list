@@ -1,5 +1,6 @@
 import { Task } from '@/components/task'
 import { Container, FloatingButton } from '@/components/ui'
+import { goTo } from '@/utils'
 import React from 'react'
 
 export default function Tasks() {
@@ -26,7 +27,7 @@ export default function Tasks() {
 				/>
 			</Container>
 
-			<FloatingButton />
+			<FloatingButton onPress={goTo('new-task')} />
 		</React.Fragment>
 	)
 }
