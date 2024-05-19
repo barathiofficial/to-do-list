@@ -19,7 +19,6 @@
 	"dependencies": {
 		"@hookform/resolvers": "^3.4.0",
 		"@reduxjs/toolkit": "^2.2.4",
-		"drizzle-orm": "^0.30.10",
 		"expo": "~51.0.8",
 		"expo-checkbox": "~3.0.0",
 		"expo-font": "~12.0.5",
@@ -42,7 +41,6 @@
 		"@typescript-eslint/eslint-plugin": "^7.8.0",
 		"@typescript-eslint/parser": "^7.8.0",
 		"babel-plugin-inline-import": "^3.0.0",
-		"drizzle-kit": "^0.21.2",
 		"eslint": "^8.57.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-prettier": "^5.1.3",

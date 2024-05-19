@@ -23,7 +23,6 @@ export function Task(props: TaskProps) {
 					<Checkbox
 						color={colors.dark}
 						style={styles.checkbox}
-						// value={props.completed}
 					/>
 				</Pressable>
 			</View>

@@ -1,16 +1,15 @@
-import { drizzle } from 'drizzle-orm/expo-sqlite'
-import { openDatabaseSync } from 'expo-sqlite/next'
-import * as schema from './schema'
+import type { SQLiteDatabase } from 'expo-sqlite'
+import { openDatabaseSync } from 'expo-sqlite'
 
-let db: ReturnType<typeof drizzle> | null = null
+let db: SQLiteDatabase | null = null
 
 export default function initDB() {
 	if (!db) {
-		const expo = openDatabaseSync('todo.db')
-		db = drizzle(expo, {
-			logger: true,
-			schema
-		})
+		db = openDatabaseSync('todo.db')
+		db.execSync(`CREATE TABLE IF NOT EXISTS categories (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT
+        )`)
 	}
 
 	return db
