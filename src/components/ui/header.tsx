@@ -1,15 +1,38 @@
-import { colors, fontFamily, gloablStyles, sizes } from '@/themes'
+import { colors, fontFamily, gloablStyles, ripple, sizes } from '@/themes'
+import * as Icons from '@expo/vector-icons'
+import { router } from 'expo-router'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 
 type HeaderProps = {
 	title?: string
+	showBackButton?: boolean
 }
 
 export function Header(props: HeaderProps) {
+	function goBack() {
+		if (router.canGoBack()) {
+			router.back()
+		}
+	}
+
 	return (
 		<View style={[styles.header, gloablStyles.shadow]}>
-			<Text style={styles.title}>{props.title}</Text>
+			{props.showBackButton && (
+				<Pressable
+					android_ripple={ripple.dark}
+					style={styles.backButton}
+					onPress={goBack}>
+					<Icons.Ionicons
+						color={colors.white}
+						name='arrow-back'
+						size={24}
+					/>
+				</Pressable>
+			)}
+			<View style={styles.main}>
+				<Text style={styles.title}>{props.title}</Text>
+			</View>
 		</View>
 	)
 }
@@ -19,14 +42,26 @@ const styles = StyleSheet.create({
 		height: sizes.height.header,
 		backgroundColor: colors.primary.darkTeal,
 		alignItems: 'center',
-		justifyContent: 'space-between',
-		flexDirection: 'row',
+		flexDirection: 'row'
+	},
+	backButton: {
+		height: sizes.height.header,
 		paddingLeft: sizes.padding.container,
-		paddingRight: 10
+		paddingRight: sizes.padding.container / 2,
+		justifyContent: 'center'
+	},
+	main: {
+		flex: 1,
+		paddingLeft: sizes.padding.container,
+		paddingRight: sizes.padding.container / 2,
+		alignItems: 'center',
+		flexDirection: 'row'
 	},
 	title: {
 		color: colors.white,
 		fontSize: sizes.fontSize.xl,
-		fontFamily: fontFamily.Poppins.SemiBold
+		fontFamily: fontFamily.Poppins.SemiBold,
+		flex: 1,
+		marginTop: 1.5
 	}
 })
