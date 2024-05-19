@@ -9,7 +9,8 @@ const screens = [
 	},
 	{
 		id: 'new-task',
-		title: 'New Task'
+		title: 'New Task',
+		showBackButton: true
 	}
 ]
 
@@ -23,7 +24,12 @@ export default function TasksLayout() {
 						name={screen.id}
 						options={{
 							header: function () {
-								return <Header title={screen.title} />
+								return (
+									<Header
+										showBackButton={screen.showBackButton}
+										title={screen.title}
+									/>
+								)
 							}
 						}}
 					/>
