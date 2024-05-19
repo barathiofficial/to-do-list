@@ -18,6 +18,9 @@ const gold = '#FFD700'
 const amber = '#FFC107'
 const cultured = '#F3F3F3'
 const onyx = '#393939'
+const darkGrayLight = '#A9A9A9'
+const lightGrayBorder = '#CCCCCC'
+const veryLightGray = '#F0F0F0'
 
 export const colors = {
 	white,
@@ -96,5 +99,23 @@ export const colors = {
 	ripple: {
 		light: cultured,
 		dark: onyx
+	},
+	textInput: {
+		label: eerieBlack,
+		error: orangeRed,
+		placeholder: darkGrayLight,
+		border: {
+			default: lightGrayBorder,
+			focused: teal,
+			error: orangeRed
+		},
+		background: {
+			default: white,
+			disabled: veryLightGray
+		},
+		text: {
+			default: eerieBlack,
+			disabled: darkGray
+		}
 	}
 }
