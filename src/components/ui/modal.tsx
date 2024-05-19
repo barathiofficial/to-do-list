@@ -1,5 +1,5 @@
 import { gloablStyles, ripple, sizes } from '@/themes'
-import Feather from '@expo/vector-icons/Feather'
+import * as Icons from '@expo/vector-icons'
 import React from 'react'
 import type { ModalProps as RNModalProps } from 'react-native'
 import {
@@ -62,7 +62,7 @@ export function Modal({
 									android_ripple={ripple.dark}
 									style={styles.close}
 									onPress={close('button')}>
-									<Feather
+									<Icons.Feather
 										name='x'
 										size={24}
 									/>

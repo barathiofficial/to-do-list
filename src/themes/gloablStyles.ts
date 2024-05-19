@@ -4,7 +4,7 @@ import { colors } from './colors'
 export const gloablStyles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: colors.light
+		backgroundColor: colors.accent.background
 	},
 	shadow: {
 		shadowOffset: {

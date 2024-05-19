@@ -1,5 +1,5 @@
 import { ripple, sizes } from '@/themes'
-import Feather from '@expo/vector-icons/Feather'
+import * as Icons from '@expo/vector-icons'
 import React from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 
@@ -19,7 +19,7 @@ export function PickItem(props: PickItemProps) {
 			<View style={styles.content}>
 				<Text>{props.text}</Text>
 				{props.selected && (
-					<Feather
+					<Icons.Feather
 						name='check'
 						size={20}
 					/>

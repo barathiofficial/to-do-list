@@ -4,7 +4,8 @@ export const sizes = {
 		input: 40,
 		button: 40,
 		select: 40,
-		tabBar: 55
+		tabBar: 55,
+		task: 50
 	},
 	border: {
 		width: 1
@@ -13,7 +14,8 @@ export const sizes = {
 		input: 10,
 		button: 10,
 		container: 20,
-		modal: 10
+		modal: 10,
+		tasK: 20
 	},
 	fontSize: {
 		xxs: 10,

@@ -1,5 +1,5 @@
-import { gloablStyles, ripple, sizes } from '@/themes'
-import Feather from '@expo/vector-icons/Feather'
+import { colors, gloablStyles, ripple } from '@/themes'
+import * as Icons from '@expo/vector-icons'
 import React from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
 
@@ -14,7 +14,8 @@ export function FloatingButton(props: FloatingButtonProps) {
 				android_ripple={ripple.dark}
 				style={styles.button}
 				onPress={props.onPress}>
-				<Feather
+				<Icons.Feather
+					color={colors.white}
 					name='plus'
 					size={24}
 				/>
@@ -31,9 +32,9 @@ const styles = StyleSheet.create({
 		width: 60,
 		height: 60,
 		borderRadius: 30,
+		backgroundColor: colors.button.addTask.darkTeal,
 		alignItems: 'center',
 		justifyContent: 'center',
-		borderWidth: sizes.border.width,
 		overflow: 'hidden'
 	},
 	button: {

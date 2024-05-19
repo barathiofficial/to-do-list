@@ -11,10 +11,10 @@ SplashScreen.preventAutoHideAsync()
 
 export default function AppLayout() {
 	const [fontsLoaded, fontError] = useFonts({
-		OpenSansRegular: require('@/assets/fonts/OpenSans-Regular.ttf'),
-		OpenSansMedium: require('@/assets/fonts/OpenSans-Medium.ttf'),
-		OpenSansSemiBold: require('@/assets/fonts/OpenSans-SemiBold.ttf'),
-		OpenSansBold: require('@/assets/fonts/OpenSans-Bold.ttf')
+		PoppinsRegular: require('@/assets/fonts/Poppins-Regular.ttf'),
+		PoppinsMedium: require('@/assets/fonts/Poppins-Medium.ttf'),
+		PoppinsSemiBold: require('@/assets/fonts/Poppins-SemiBold.ttf'),
+		PoppinsBold: require('@/assets/fonts/Poppins-Bold.ttf')
 	})
 
 	const onLayoutRootView = React.useCallback(async () => {

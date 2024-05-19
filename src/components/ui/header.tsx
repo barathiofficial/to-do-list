@@ -17,7 +17,7 @@ export function Header(props: HeaderProps) {
 const styles = StyleSheet.create({
 	header: {
 		height: sizes.height.header,
-		backgroundColor: colors.white,
+		backgroundColor: colors.primary.darkTeal,
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		flexDirection: 'row',
@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
 		paddingRight: 10
 	},
 	title: {
+		color: colors.white,
 		fontSize: sizes.fontSize.xl,
-		fontFamily: fontFamily.OpenSans.Bold
+		fontFamily: fontFamily.Poppins.SemiBold
 	}
 })

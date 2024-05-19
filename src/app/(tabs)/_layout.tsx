@@ -1,6 +1,6 @@
 import { Header } from '@/components/ui'
-import { fontFamily, sizes } from '@/themes'
-import Feather from '@expo/vector-icons/Feather'
+import { colors, fontFamily, sizes } from '@/themes'
+import * as Icons from '@expo/vector-icons'
 import { Tabs } from 'expo-router'
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
@@ -8,7 +8,7 @@ import { StyleSheet, Text } from 'react-native'
 type Screen = {
 	id: string
 	title: string
-	icon: 'check-circle' | 'cloud-lightning'
+	icon: keyof typeof Icons.Feather.glyphMap
 	options?: {
 		headerShown?: boolean
 	}
@@ -35,7 +35,9 @@ export default function TabsLayout() {
 		<Tabs
 			screenOptions={{
 				tabBarStyle: styles.tabBar,
-				tabBarHideOnKeyboard: true
+				tabBarHideOnKeyboard: true,
+				tabBarActiveTintColor: colors.tabBar.active,
+				tabBarInactiveTintColor: colors.tabBar.inactive
 			}}>
 			{screens.map((screen) => {
 				return (
@@ -49,7 +51,7 @@ export default function TabsLayout() {
 							},
 							tabBarIcon: function ({ color }) {
 								return (
-									<Feather
+									<Icons.Feather
 										color={color}
 										name={screen.icon}
 										size={24}
@@ -69,11 +71,14 @@ export default function TabsLayout() {
 
 const styles = StyleSheet.create({
 	tabBar: {
-		height: sizes.height.tabBar
+		backgroundColor: colors.tabBar.background,
+		height: sizes.height.tabBar,
+		borderTopWidth: sizes.border.width,
+		borderTopColor: colors.border.lightGray
 	},
 	label: {
 		marginBottom: 5,
 		fontSize: 12,
-		fontFamily: fontFamily.OpenSans.Medium
+		fontFamily: fontFamily.Poppins.Medium
 	}
 })

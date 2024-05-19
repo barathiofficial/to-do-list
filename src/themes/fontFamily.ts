@@ -1,8 +1,8 @@
 export const fontFamily = {
-	OpenSans: {
-		Regular: 'OpenSansRegular',
-		Medium: 'OpenSansMedium',
-		SemiBold: 'OpenSansSemiBold',
-		Bold: 'OpenSansBold'
+	Poppins: {
+		Regular: 'PoppinsRegular',
+		Medium: 'PoppinsMedium',
+		SemiBold: 'PoppinsSemiBold',
+		Bold: 'PoppinsBold'
 	}
 }
