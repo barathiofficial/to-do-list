@@ -30,7 +30,7 @@ export function Header(props: HeaderProps) {
 					/>
 				</Pressable>
 			)}
-			<View style={styles.main}>
+			<View style={[styles.main, styles.withBackButton]}>
 				<Text style={styles.title}>{props.title}</Text>
 			</View>
 		</View>
@@ -46,8 +46,7 @@ const styles = StyleSheet.create({
 	},
 	backButton: {
 		height: sizes.height.header,
-		paddingLeft: sizes.padding.container,
-		paddingRight: sizes.padding.container / 2,
+		paddingHorizontal: sizes.padding.container,
 		justifyContent: 'center'
 	},
 	main: {
@@ -56,6 +55,9 @@ const styles = StyleSheet.create({
 		paddingRight: sizes.padding.container / 2,
 		alignItems: 'center',
 		flexDirection: 'row'
+	},
+	withBackButton: {
+		paddingLeft: sizes.padding.container / 2
 	},
 	title: {
 		color: colors.white,
