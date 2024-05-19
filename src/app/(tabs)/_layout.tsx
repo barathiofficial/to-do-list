@@ -1,7 +1,6 @@
-import { Header } from '@components/ui'
-import { colors } from '@constants'
+import { Header } from '@/components/ui'
+import { typography } from '@/themes'
 import Feather from '@expo/vector-icons/Feather'
-import { typography } from '@themes'
 import { Tabs } from 'expo-router'
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
@@ -36,8 +35,6 @@ export default function TabsLayout() {
 		<Tabs
 			screenOptions={{
 				tabBarStyle: styles.tabBar,
-				tabBarActiveTintColor: colors.primary,
-				tabBarInactiveTintColor: colors.gray,
 				tabBarHideOnKeyboard: true
 			}}>
 			{screens.map((screen) => {
@@ -76,8 +73,6 @@ export default function TabsLayout() {
 
 const styles = StyleSheet.create({
 	tabBar: {
-		backgroundColor: colors.white,
-		borderTopColor: colors.light,
 		borderTopWidth: 1
 	},
 	label: {

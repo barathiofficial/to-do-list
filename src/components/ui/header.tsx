@@ -1,5 +1,4 @@
-import { colors } from '@constants'
-import { gloablStyles, sizes, typography } from '@themes'
+import { gloablStyles, sizes, typography } from '@/themes'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
@@ -18,14 +17,11 @@ export function Header(props: HeaderProps) {
 const styles = StyleSheet.create({
 	header: {
 		height: sizes.height.header,
-		backgroundColor: colors.primary,
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		flexDirection: 'row',
 		paddingLeft: sizes.padding.container,
 		paddingRight: 10
 	},
-	title: {
-		color: colors.light
-	}
+	title: {}
 })

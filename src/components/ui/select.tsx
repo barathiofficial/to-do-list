@@ -1,5 +1,4 @@
-import { colors } from '@constants'
-import { ripple, sizes, typography } from '@themes'
+import { ripple, sizes, typography } from '@/themes'
 import React from 'react'
 import type { PressableProps, TextInputProps, TextProps, ViewProps } from 'react-native'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
@@ -62,8 +61,6 @@ const styles = StyleSheet.create({
 		height: sizes.height.select,
 		borderRadius: 5,
 		borderWidth: sizes.border.width,
-		borderColor: colors.secondary,
-		backgroundColor: colors.light,
 		overflow: 'hidden'
 	},
 	pressable: {
@@ -72,17 +69,10 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		paddingHorizontal: 10
 	},
-	value: {
-		color: colors.dark
-	},
-	placeholder: {
-		color: colors.gray
-	},
-	hasError: {
-		borderColor: colors.danger
-	},
+	value: {},
+	placeholder: {},
+	hasError: {},
 	error: {
-		color: colors.danger,
 		position: 'absolute',
 		top: '100%',
 		left: 0

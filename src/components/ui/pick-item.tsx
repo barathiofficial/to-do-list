@@ -1,6 +1,5 @@
-import { colors } from '@constants'
+import { ripple, sizes, typography } from '@/themes'
 import Feather from '@expo/vector-icons/Feather'
-import { ripple, sizes, typography } from '@themes'
 import React from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 
@@ -21,7 +20,6 @@ export function PickItem(props: PickItemProps) {
 				<Text style={typography.md}>{props.text}</Text>
 				{props.selected && (
 					<Feather
-						color={colors.primary}
 						name='check'
 						size={20}
 					/>
@@ -35,8 +33,7 @@ const styles = StyleSheet.create({
 	container: {
 		paddingVertical: 10,
 		paddingHorizontal: 10,
-		borderBottomWidth: sizes.border.width,
-		borderBottomColor: colors.secondary
+		borderBottomWidth: sizes.border.width
 	},
 	lastItem: {
 		borderBottomWidth: 0

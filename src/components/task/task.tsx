@@ -1,6 +1,5 @@
-import { colors } from '@constants'
+import { gloablStyles, ripple, sizes, typography } from '@/themes'
 import Feather from '@expo/vector-icons/Feather'
-import { gloablStyles, ripple, sizes, typography } from '@themes'
 import Checkbox from 'expo-checkbox'
 import React from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
@@ -20,10 +19,7 @@ export function Task(props: TaskProps) {
 					android_ripple={ripple.light}
 					style={gloablStyles.iconPressable}
 					onPress={props.onCheck}>
-					<Checkbox
-						color={colors.dark}
-						style={styles.checkbox}
-					/>
+					<Checkbox style={styles.checkbox} />
 				</Pressable>
 			</View>
 			<View style={styles.textWrapper}>
@@ -39,7 +35,6 @@ export function Task(props: TaskProps) {
 					style={gloablStyles.iconPressable}
 					onPress={props.onDelete}>
 					<Feather
-						color={colors.dark}
 						name='trash'
 						size={20}
 					/>
@@ -53,7 +48,6 @@ const styles = StyleSheet.create({
 	task: {
 		flex: 1,
 		borderBottomWidth: sizes.border.width,
-		borderBottomColor: colors.light,
 		flexDirection: 'row',
 		alignItems: 'center',
 		minHeight: 50,
@@ -70,7 +64,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'center'
 	},
 	completed: {
-		textDecorationLine: 'line-through',
-		color: colors.dark
+		textDecorationLine: 'line-through'
 	}
 })

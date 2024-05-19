@@ -1,5 +1,5 @@
-import StoreProvider from '@redux/context/StoreProvider'
-import { gloablStyles } from '@themes'
+import StoreProvider from '@/redux/context/StoreProvider'
+import { gloablStyles } from '@/themes'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
@@ -11,10 +11,10 @@ SplashScreen.preventAutoHideAsync()
 
 export default function AppLayout() {
 	const [fontsLoaded, fontError] = useFonts({
-		'inter-regular': require('@/assets/fonts/Inter-Regular.ttf'),
-		'inter-medium': require('@/assets/fonts/Inter-Medium.ttf'),
-		'inter-semibold': require('@/assets/fonts/Inter-SemiBold.ttf'),
-		'inter-bold': require('@/assets/fonts/Inter-Bold.ttf')
+		OpenSansRegular: require('@/assets/fonts/OpenSans-Regular.ttf'),
+		OpenSansMedium: require('@/assets/fonts/OpenSans-Medium.ttf'),
+		OpenSansSemiBold: require('@/assets/fonts/OpenSans-SemiBold.ttf'),
+		OpenSansBold: require('@/assets/fonts/OpenSans-Bold.ttf')
 	})
 
 	const onLayoutRootView = React.useCallback(async () => {

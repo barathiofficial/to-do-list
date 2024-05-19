@@ -1,6 +1,5 @@
-import { colors } from '@constants'
+import { gloablStyles, ripple, sizes, typography } from '@/themes'
 import Feather from '@expo/vector-icons/Feather'
-import { gloablStyles, ripple, sizes, typography } from '@themes'
 import React from 'react'
 import type { ModalProps as RNModalProps } from 'react-native'
 import {
@@ -64,7 +63,6 @@ export function Modal({
 									style={styles.close}
 									onPress={close('button')}>
 									<Feather
-										color={colors.light}
 										name='x'
 										size={24}
 									/>
@@ -81,22 +79,18 @@ export function Modal({
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: colors.modal,
 		padding: sizes.padding.container,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
 	content: {
-		backgroundColor: colors.light,
 		borderRadius: 10,
 		overflow: 'hidden'
 	},
 	header: {
-		backgroundColor: colors.primary,
 		flexDirection: 'row'
 	},
 	title: {
-		color: colors.light,
 		flex: 1,
 		padding: sizes.padding.modal
 	},
