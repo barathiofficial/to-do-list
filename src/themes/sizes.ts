@@ -13,9 +13,9 @@ export const sizes = {
 	padding: {
 		input: 10,
 		button: 10,
-		container: 20,
+		container: 15,
 		modal: 10,
-		tasK: 20
+		tasK: 15
 	},
 	fontSize: {
 		xxs: 10,
