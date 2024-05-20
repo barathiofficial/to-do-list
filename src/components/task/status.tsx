@@ -20,7 +20,7 @@ export function Status(props: StatusProps) {
 			<Icons.Octicons
 				color={color.foreground}
 				name='dot-fill'
-				size={20}
+				size={14}
 				style={styles.dot}
 			/>
 		</View>
@@ -30,14 +30,14 @@ export function Status(props: StatusProps) {
 const styles = StyleSheet.create({
 	container: {
 		borderRadius: sizes.padding.tasK,
-		paddingHorizontal: 13,
-		paddingVertical: 3,
+		paddingHorizontal: 10,
+		paddingVertical: 2,
 		flexDirection: 'row',
 		alignItems: 'center'
 	},
 	text: {
 		textTransform: 'uppercase',
-		fontSize: sizes.fontSize.xs,
+		fontSize: sizes.fontSize.xxs,
 		fontFamily: fontFamily.Poppins.Medium,
 		color: colors.accent.text.primary,
 		marginTop: 1.5
