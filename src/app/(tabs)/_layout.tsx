@@ -1,9 +1,11 @@
 import { Header } from '@/components/ui'
 import { colors, fontFamily, sizes } from '@/themes'
 import * as Icons from '@expo/vector-icons'
+import { CommonActions } from '@react-navigation/native'
 import { Tabs } from 'expo-router'
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { BottomNavigation } from 'react-native-paper'
 
 type Screen = {
 	id: string
@@ -38,7 +40,49 @@ export default function TabsLayout() {
 				tabBarHideOnKeyboard: true,
 				tabBarActiveTintColor: colors.tabBar.active,
 				tabBarInactiveTintColor: colors.tabBar.inactive
-			}}>
+			}}
+			tabBar={({ navigation, state, descriptors, insets }) => (
+				<BottomNavigation.Bar
+					navigationState={state}
+					safeAreaInsets={insets}
+					getLabelText={({ route }) => {
+						const { options } = descriptors[route.key]
+						const label =
+							options.tabBarLabel !== undefined
+								? options.tabBarLabel
+								: options.title !== undefined
+									? options.title
+									: route.title
+
+						return label
+					}}
+					renderIcon={({ route, focused, color }) => {
+						const { options } = descriptors[route.key]
+
+						if (options.tabBarIcon) {
+							return options.tabBarIcon({ focused, color, size: 24 })
+						}
+
+						return null
+					}}
+					onTabPress={({ route, preventDefault }) => {
+						const event = navigation.emit({
+							type: 'tabPress',
+							target: route.key,
+							canPreventDefault: true
+						})
+
+						if (event.defaultPrevented) {
+							preventDefault()
+						} else {
+							navigation.dispatch({
+								...CommonActions.navigate(route.name, route.params),
+								target: state.key
+							})
+						}
+					}}
+				/>
+			)}>
 			{screens.map((screen) => {
 				return (
 					<Tabs.Screen
@@ -49,17 +93,15 @@ export default function TabsLayout() {
 							header: function () {
 								return <Header title={screen.title} />
 							},
-							tabBarIcon: function ({ color }) {
+							tabBarLabel: screen.title,
+							tabBarIcon: ({ color, size }) => {
 								return (
 									<Icons.Feather
 										color={color}
 										name={screen.icon}
-										size={24}
+										size={size}
 									/>
 								)
-							},
-							tabBarLabel: function ({ color }) {
-								return <Text style={[styles.label, { color }]}>{screen.title}</Text>
 							}
 						}}
 					/>
