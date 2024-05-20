@@ -35,13 +35,11 @@ export function TabBar({ navigation, state, insets }: BottomTabBarProps) {
 	return (
 		<BottomNavigation.Bar
 			activeColor={colors.tabBar.active}
+			activeIndicatorStyle={styles.activeIndicatorStyle}
 			inactiveColor={colors.tabBar.inactive}
 			navigationState={state}
 			safeAreaInsets={insets}
 			style={styles.tabBar}
-			activeIndicatorStyle={{
-				backgroundColor: colors.primary.darkTeal + '20'
-			}}
 			renderIcon={({ route, color }) => {
 				const icon = tabBarScreens.find((screen) => screen.name === route.name)?.icon
 
@@ -84,6 +82,9 @@ const styles = StyleSheet.create({
 		height: sizes.height.tabBar,
 		borderTopWidth: sizes.border.width,
 		borderTopColor: colors.border.lightGray
+	},
+	activeIndicatorStyle: {
+		backgroundColor: colors.primary.darkTeal + '20'
 	},
 	label: {
 		fontSize: 12,
