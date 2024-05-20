@@ -1,8 +1,8 @@
-import { colors, fontFamily, gloablStyles, ripple, sizes } from '@/themes'
-import * as Icons from '@expo/vector-icons'
+import { colors, fontFamily, sizes } from '@/themes'
 import { router } from 'expo-router'
 import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { Appbar } from 'react-native-paper'
 
 type HeaderProps = {
 	title?: string
@@ -17,53 +17,33 @@ export function Header(props: HeaderProps) {
 	}
 
 	return (
-		<View style={[styles.header, gloablStyles.shadow]}>
+		<Appbar.Header
+			elevated={true}
+			mode='small'
+			statusBarHeight={0}
+			style={styles.header}>
 			{props.showBackButton && (
-				<Pressable
-					android_ripple={ripple.dark}
-					style={styles.backButton}
-					onPress={goBack}>
-					<Icons.Ionicons
-						color={colors.white}
-						name='arrow-back'
-						size={24}
-					/>
-				</Pressable>
+				<Appbar.BackAction
+					iconColor={colors.white}
+					onPress={goBack}
+				/>
 			)}
-			<View style={[styles.main, styles.withBackButton]}>
-				<Text style={styles.title}>{props.title}</Text>
-			</View>
-		</View>
+			<Appbar.Content
+				title={props.title || ''}
+				titleStyle={styles.title}
+			/>
+		</Appbar.Header>
 	)
 }
 
 const styles = StyleSheet.create({
 	header: {
 		height: sizes.height.header,
-		backgroundColor: colors.primary.darkTeal,
-		alignItems: 'center',
-		flexDirection: 'row'
-	},
-	backButton: {
-		height: sizes.height.header,
-		paddingHorizontal: sizes.padding.container,
-		justifyContent: 'center'
-	},
-	main: {
-		flex: 1,
-		paddingLeft: sizes.padding.container,
-		paddingRight: sizes.padding.container / 2,
-		alignItems: 'center',
-		flexDirection: 'row'
-	},
-	withBackButton: {
-		paddingLeft: sizes.padding.container / 2
+		backgroundColor: colors.primary.darkTeal
 	},
 	title: {
 		color: colors.white,
 		fontSize: sizes.fontSize.xl,
-		fontFamily: fontFamily.Poppins.SemiBold,
-		flex: 1,
-		marginTop: 1.5
+		fontFamily: fontFamily.Poppins.SemiBold
 	}
 })
