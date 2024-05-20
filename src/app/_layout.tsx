@@ -5,6 +5,7 @@ import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import React from 'react'
 import { Text } from 'react-native'
+import { PaperProvider } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 SplashScreen.preventAutoHideAsync()
@@ -28,14 +29,16 @@ export default function AppLayout() {
 	}
 
 	return (
-		<SafeAreaView
-			style={gloablStyles.container}
-			onLayout={onLayoutRootView}>
-			<StoreProvider>
-				<Stack screenOptions={{ headerShown: false }}>
-					<Stack.Screen name='(tabs)' />
-				</Stack>
-			</StoreProvider>
-		</SafeAreaView>
+		<StoreProvider>
+			<PaperProvider>
+				<SafeAreaView
+					style={gloablStyles.container}
+					onLayout={onLayoutRootView}>
+					<Stack screenOptions={{ headerShown: false }}>
+						<Stack.Screen name='(tabs)' />
+					</Stack>
+				</SafeAreaView>
+			</PaperProvider>
+		</StoreProvider>
 	)
 }
