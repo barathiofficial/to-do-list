@@ -1,6 +1,6 @@
 import { colors } from '@/themes'
 import * as Icons from '@expo/vector-icons'
-import React from 'react'
+import React, { useCallback } from 'react'
 
 export type PriorityProps = {
 	priority?: 'low' | 'medium' | 'high'
@@ -9,7 +9,7 @@ export type PriorityProps = {
 export function Priority(props: PriorityProps) {
 	const color = colors.priority[props.priority || 'low'].dark
 
-	const getIconName = React.useCallback(() => {
+	const getIconName = useCallback(() => {
 		switch (props.priority) {
 			case 'low':
 				return 'chevron-down'

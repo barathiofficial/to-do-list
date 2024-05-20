@@ -3,7 +3,7 @@ import { gloablStyles } from '@/themes'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Text } from 'react-native'
 import { PaperProvider } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -18,7 +18,7 @@ export default function AppLayout() {
 		PoppinsBold: require('@/assets/fonts/Poppins-Bold.ttf')
 	})
 
-	const onLayoutRootView = React.useCallback(async () => {
+	const onLayoutRootView = useCallback(async () => {
 		if (fontsLoaded || fontError) {
 			await SplashScreen.hideAsync()
 		}

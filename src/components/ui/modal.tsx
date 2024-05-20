@@ -1,5 +1,6 @@
 import { gloablStyles, ripple, sizes } from '@/themes'
 import * as Icons from '@expo/vector-icons'
+import type { ReactNode } from 'react'
 import React from 'react'
 import type { ModalProps as RNModalProps } from 'react-native'
 import {
@@ -13,7 +14,7 @@ import {
 
 type ModalProps = {
 	title?: string
-	children?: React.ReactNode
+	children?: ReactNode
 	onClose?: () => void
 	closeOnTouchOutside?: boolean
 	closeOnHardwareBackPress?: boolean

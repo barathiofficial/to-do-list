@@ -1,5 +1,5 @@
 import { colors, fontFamily, sizes } from '@/themes'
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import type { Control, FieldValues, Path, PathValue } from 'react-hook-form'
 import { useController } from 'react-hook-form'
 import type {
@@ -41,8 +41,8 @@ export function Input<T extends FieldValues>({
 			defaultValue: '' as PathValue<T, Path<T>>
 		})
 
-	const [focused, setFocused] = React.useState(false)
-	const [localValue, setLocalValue] = React.useState(props.value || '')
+	const [focused, setFocused] = useState(false)
+	const [localValue, setLocalValue] = useState(props.value || '')
 
 	const regularField = {
 		value: localValue,
@@ -59,7 +59,7 @@ export function Input<T extends FieldValues>({
 	const field = controller ? controller.field : regularField
 	const fieldState = controller ? controller.fieldState : regularFieldState
 
-	const inputStyle = React.useMemo(() => {
+	const inputStyle = useMemo(() => {
 		return [
 			styles.input,
 			focused && styles.focused,
