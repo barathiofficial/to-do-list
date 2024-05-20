@@ -28,7 +28,7 @@ export function Priority(props: PriorityProps) {
 		<Icons.MaterialCommunityIcons
 			color={color}
 			name={getIconName()}
-			size={24}
+			size={18}
 		/>
 	)
 }
