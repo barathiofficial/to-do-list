@@ -4,7 +4,7 @@ export const sizes = {
 		input: 40,
 		button: 40,
 		select: 40,
-		tabBar: 55,
+		tabBar: 70,
 		task: 50
 	},
 	border: {
