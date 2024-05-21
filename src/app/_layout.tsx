@@ -1,9 +1,9 @@
-import StoreProvider from '@/redux/context/StoreProvider'
-import { gloablStyles } from '@/themes'
+import { colors, gloablStyles } from '@/themes'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
-import React, { useCallback } from 'react'
+import { StatusBar } from 'expo-status-bar'
+import React, { Fragment, useCallback } from 'react'
 import { Text } from 'react-native'
 import { PaperProvider } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -29,7 +29,7 @@ export default function AppLayout() {
 	}
 
 	return (
-		<StoreProvider>
+		<Fragment>
 			<PaperProvider>
 				<SafeAreaView
 					style={gloablStyles.container}
@@ -39,6 +39,11 @@ export default function AppLayout() {
 					</Stack>
 				</SafeAreaView>
 			</PaperProvider>
-		</StoreProvider>
+			<StatusBar
+				animated
+				backgroundColor={colors.primary.darkTeal}
+				style='light'
+			/>
+		</Fragment>
 	)
 }
