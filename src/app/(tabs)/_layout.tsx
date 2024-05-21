@@ -16,6 +16,7 @@ export default function TabsLayout() {
 						name={screen.name}
 						options={{
 							...screen.options,
+							lazy: true,
 							header: function () {
 								return <Header title={screen.title} />
 							}
