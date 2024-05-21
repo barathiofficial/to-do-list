@@ -1,7 +1,8 @@
 import { colors, fontFamily, sizes } from '@/themes'
 import * as Icons from '@expo/vector-icons'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+import { Text } from 'react-native-paper'
 
 export type StatusProps = {
 	status?: 'todo' | 'done' | 'progress'
