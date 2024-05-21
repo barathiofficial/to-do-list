@@ -8,22 +8,25 @@ export default function Tasks() {
 		<Fragment>
 			<Container>
 				<Task
+					category='shopping'
 					notes='Buy some milk and bread'
 					priority='low'
 					status='todo'
 					task='Go to shopping'
 				/>
 				<Task
+					category='work'
 					notes='Call John to discuss the project'
 					priority='high'
 					status='progress'
 					task='Call John'
 				/>
 				<Task
-					notes='Prepare the presentation for the meeting'
+					category='finance'
+					notes='Pay the bills'
 					priority='medium'
 					status='done'
-					task='Prepare the presentation'
+					task='Pay the bills'
 				/>
 			</Container>
 
