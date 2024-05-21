@@ -11,36 +11,38 @@ import { Status } from './status'
 type TaskProps = {
 	task?: string
 	notes?: string
+	category?: keyof typeof colors.categories
 } & StatusProps &
 	PriorityProps
 
 export function Task(props: TaskProps) {
+	const categoryColor = colors.categories[props.category || 'shopping']
 	return (
 		<Pressable
 			android_ripple={ripple.light}
 			style={styles.container}>
-			<View style={styles.category}>
+			<View style={[styles.category, { backgroundColor: categoryColor.background }]}>
 				<Icons.Feather
-					color={colors.ripple.dark}
+					color={categoryColor.foreground}
 					name='shopping-bag'
 					size={16}
 				/>
 			</View>
 			<View style={styles.mid}>
-				<View>
-					<Text
-						numberOfLines={1}
-						style={styles.task}
-						variant='bodyMedium'>
-						{props.task}
-					</Text>
+				<Text
+					numberOfLines={1}
+					style={styles.task}
+					variant='bodyMedium'>
+					{props.task}
+				</Text>
+				{props.notes && (
 					<Text
 						numberOfLines={1}
 						style={styles.notes}
 						variant='bodySmall'>
 						{props.notes}
 					</Text>
-				</View>
+				)}
 			</View>
 			<View style={styles.right}>
 				<Status status={props.status} />
@@ -64,7 +66,6 @@ const styles = StyleSheet.create({
 		marginRight: 5,
 		width: 30,
 		height: 30,
-		backgroundColor: colors.status.done.bright.background,
 		borderRadius: 5,
 		alignItems: 'center',
 		justifyContent: 'center'
