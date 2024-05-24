@@ -1,6 +1,6 @@
 import { colors } from '@/themes'
-import * as Icons from '@expo/vector-icons'
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 export type PriorityProps = {
 	priority?: 'low' | 'medium' | 'high'
@@ -25,7 +25,7 @@ export function Priority(props: PriorityProps) {
 	}, [props.priority])
 
 	return (
-		<Icons.MaterialCommunityIcons
+		<MaterialCommunityIcons
 			color={color}
 			name={getIconName()}
 			size={18}
