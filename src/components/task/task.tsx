@@ -1,8 +1,7 @@
 import { colors, fontFamily, ripple, sizes } from '@/themes'
-import * as Icons from '@expo/vector-icons'
-import React from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-paper'
+import Feather from 'react-native-vector-icons/Feather'
 import type { PriorityProps } from './priority'
 import { Priority } from './priority'
 import type { StatusProps } from './status'
@@ -22,7 +21,7 @@ export function Task(props: TaskProps) {
 			android_ripple={ripple.light}
 			style={styles.container}>
 			<View style={[styles.category, { backgroundColor: categoryColor.background }]}>
-				<Icons.Feather
+				<Feather
 					color={categoryColor.foreground}
 					name='shopping-bag'
 					size={16}
