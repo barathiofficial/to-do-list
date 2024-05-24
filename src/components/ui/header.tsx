@@ -1,6 +1,5 @@
 import { colors, fontFamily, sizes } from '@/themes'
-import { router } from 'expo-router'
-import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { StyleSheet } from 'react-native'
 import { Appbar } from 'react-native-paper'
 
@@ -10,9 +9,11 @@ type HeaderProps = {
 }
 
 export function Header(props: HeaderProps) {
+	const navigation = useNavigation()
+
 	function goBack() {
-		if (router.canGoBack()) {
-			router.back()
+		if (navigation.canGoBack()) {
+			navigation.goBack()
 		}
 	}
 
