@@ -5,13 +5,14 @@ module.exports = {
 		}
 	},
 	env: {
-		browser: true,
-		es2021: true
+		es2021: true,
+		node: true
 	},
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
-		'plugin:react/recommended'
+		'plugin:react/recommended',
+		'prettier'
 	],
 	overrides: [
 		{
@@ -77,17 +78,14 @@ module.exports = {
 		'no-restricted-syntax': [
 			'error',
 			{
-				selector: `
-                ArrowFunctionExpression
-                :not(CallExpression > ArrowFunctionExpression)
-                :not(Property > ArrowFunctionExpression)
-                :not(JSXExpressionContainer > ArrowFunctionExpression)
-                :not(CallExpression[callee.object.name='Promise'] > ArrowFunctionExpression)
-              `,
-				message: `
-                Arrow functions are not allowed except in callbacks, object properties, JSX properties, and as Promise callbacks.
-              `
+				selector:
+					'ArrowFunctionExpression:not(CallExpression > ArrowFunctionExpression):not(Property > ArrowFunctionExpression):not(JSXExpressionContainer > ArrowFunctionExpression)',
+				message:
+					'Arrow functions are not allowed except in callbacks, object properties, and JSX properties.'
 			}
-		]
+		],
+		'react/jsx-uses-react': 'off',
+		'react/react-in-jsx-scope': 'off',
+		'@typescript-eslint/no-var-requires': 'off'
 	}
 }
