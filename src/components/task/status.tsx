@@ -1,8 +1,7 @@
 import { colors, fontFamily, sizes } from '@/themes'
-import * as Icons from '@expo/vector-icons'
-import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-paper'
+import Octicons from 'react-native-vector-icons/Octicons'
 
 export type StatusProps = {
 	status?: 'todo' | 'done' | 'progress'
@@ -18,7 +17,7 @@ export function Status(props: StatusProps) {
 				style={styles.text}>
 				{props.status}
 			</Text>
-			<Icons.Octicons
+			<Octicons
 				color={color.foreground}
 				name='dot-fill'
 				size={14}
