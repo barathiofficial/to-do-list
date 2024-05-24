@@ -1,9 +1,17 @@
 import { Task } from '@/components/task'
 import { Container, FloatingButton } from '@/components/ui'
-import { goTo } from '@/utils'
+import { useNavigation } from '@react-navigation/native'
 import { Fragment } from 'react'
 
 export function Tasks() {
+	const navigation = useNavigation()
+
+	function goTo(route: string) {
+		return function () {
+			navigation.navigate(route)
+		}
+	}
+
 	return (
 		<Fragment>
 			<Container>
