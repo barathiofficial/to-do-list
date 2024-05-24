@@ -1,6 +1,6 @@
 import { colors, fontFamily, sizes } from '@/themes'
 import { omit } from '@/utils'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import type { Control, FieldValues, Path, PathValue } from 'react-hook-form'
 import { useController } from 'react-hook-form'
 import type { TextProps, ViewProps } from 'react-native'
@@ -50,7 +50,7 @@ export function Input<T extends FieldValues>({
 	const field = controller ? controller.field : regularField
 	const fieldState = controller ? controller.fieldState : regularFieldState
 
-	const handleChangeText = (text: string) => {
+	function handleChangeText(text: string) {
 		field.onChange(text)
 
 		if (!control) {

@@ -1,15 +1,13 @@
 import { colors, fontFamily, sizes } from '@/themes'
-import * as Icons from '@expo/vector-icons'
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import { CommonActions } from '@react-navigation/native'
-import React from 'react'
 import { StyleSheet, Text } from 'react-native'
-import { BottomNavigation } from 'react-native-paper'
+import { BottomNavigation, Icon } from 'react-native-paper'
 
 type Screen = {
 	name: string
 	title: string
-	icon: keyof typeof Icons.Feather.glyphMap
+	icon: string
 	options?: {
 		headerShown?: boolean
 	}
@@ -44,10 +42,10 @@ export function TabBar({ navigation, state, insets }: BottomTabBarProps) {
 				const icon = tabBarScreens.find((screen) => screen.name === route.name)?.icon
 
 				return (
-					<Icons.Feather
+					<Icon
 						color={color}
-						name={icon}
 						size={24}
+						source={icon}
 					/>
 				)
 			}}

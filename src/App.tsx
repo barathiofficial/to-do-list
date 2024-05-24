@@ -1,12 +1,15 @@
-import React from 'react'
-import { SafeAreaView, StatusBar, Text } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { StatusBar } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { BottomTabNavigator } from './navigators'
 
-function App(): React.JSX.Element {
+function App() {
 	return (
 		<SafeAreaView>
 			<StatusBar />
-
-			<Text>App</Text>
+			<NavigationContainer>
+				<BottomTabNavigator />
+			</NavigationContainer>
 		</SafeAreaView>
 	)
 }
