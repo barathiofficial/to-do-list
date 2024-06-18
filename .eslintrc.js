@@ -17,9 +17,6 @@ module.exports = {
 	],
 	overrides: [
 		{
-			env: {
-				node: true
-			},
 			files: ['.eslintrc.{js,cjs}'],
 			parserOptions: {
 				sourceType: 'script'
@@ -31,18 +28,18 @@ module.exports = {
 		ecmaVersion: 'latest',
 		sourceType: 'module'
 	},
-	plugins: ['@typescript-eslint', 'react', 'prettier'],
+	plugins: ['@react-native', '@typescript-eslint', 'react', 'prettier'],
 	rules: {
 		indent: ['error', 'tab', { SwitchCase: 1 }],
 		'linebreak-style': ['error', 'windows'],
-		quotes: ['off', 'single'],
+		quotes: ['error', 'single'],
 		semi: ['error', 'never'],
 		'@typescript-eslint/consistent-type-imports': [
 			'error',
 			{
 				prefer: 'type-imports',
 				disallowTypeAnnotations: true,
-				fixStyle: 'separate-type-imports'
+				fixStyle: 'inline-type-imports'
 			}
 		],
 		'react/no-unescaped-entities': 'error',
@@ -69,13 +66,7 @@ module.exports = {
 			}
 		],
 		'no-empty': 'off',
-		'prettier/prettier': [
-			'error',
-			{},
-			{
-				usePrettierrc: true
-			}
-		],
+		'prettier/prettier': ['error', {}, { usePrettierrc: true }],
 		'no-restricted-syntax': [
 			'error',
 			{
